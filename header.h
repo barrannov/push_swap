@@ -31,7 +31,10 @@ void rr(t_ab *a, t_ab *b);
  * sort_helpers_f
  */
 int amount_list_el(t_ab *list);
-
+int is_sorted_list(t_ab *list);
+int is_sorted_list_rev(t_ab *list);
+int sort_by_hand(t_ab **a, t_ab *b);
+void vizual(t_ab *a, t_ab *b);
 
 
 

@@ -33,7 +33,7 @@ void rra_rrb(t_ab **strc)
 	if ((*strc) != NULL)
 	{
 		newNode = *strc;
-		while (newNode->next != NULL)
+		while (newNode->next->next != NULL)
 			newNode = newNode->next;
 		pa_pb(&newNode, strc);
 	delete(*strc);
@@ -54,7 +54,7 @@ void ra_rb(t_ab **strc)
 		while (newNode->next != NULL)
 			newNode = newNode->next;
 		newNode->next = (t_ab *) malloc(sizeof(t_ab));
-		newNode->next->num = t;
+		newNode->num = t;
 		newNode->next->next = NULL;
 	}
 }

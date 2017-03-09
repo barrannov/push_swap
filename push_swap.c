@@ -42,6 +42,8 @@ t_ab *create_numbers(char **numb)
 		temp = temp->next;
 
 	}
+	temp->next = NULL;
+
 	return (a);
 }
 
@@ -54,16 +56,16 @@ void vizual(t_ab *a, t_ab *b)
 	nb = b;
 	printf("/////////////////////////////////////////////////\n");
 	printf("//     %5s %20s           //\n//                                             //\n","Stack A:" ,"Stack B:");
-	while (na != NULL || nb != NULL)
+	while (na ->next != NULL || nb ->next != NULL)
 	{
 		printf("//");
 
-		if (na != NULL)
+		if (na ->next != NULL)
 		{
 			printf("       %20-d", na->num);
 			na = na->next;
 		}
-		if (na != NULL)
+		if (nb ->next != NULL)
 		{
 			printf("%18-d//", nb->num);
 			nb = nb->next;
@@ -107,10 +109,10 @@ int main(int arg, char *argv[])
 	}
 	a = create_numbers(argv);
 
-	printf("%d\n", a->num);
-	//printf("%d\n", amount_list_el(a));
+//	printf("%d\n", a->num);
+	sort_by_hand(&a, b);
 
-//	vizual(a, a);
+	vizual(a, a);
 
 //	list = (t_ab *) malloc(sizeof(t_ab));;
 //	list->next = (t_ab*)malloc(sizeof(t_ab));
