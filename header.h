@@ -10,6 +10,9 @@ typedef struct s_ab {
 	struct s_ab *next;
 } t_ab;
 
+/*
+ * tools_f
+ */
 void sa_sb(t_ab *strc);
 
 void pa_pb(t_ab **from, t_ab **to);
@@ -23,5 +26,13 @@ void rra_rrb(t_ab **strc);
 void rrr(t_ab *a, t_ab *b);
 
 void rr(t_ab *a, t_ab *b);
+
+/*
+ * sort_helpers_f
+ */
+int amount_list_el(t_ab *list);
+
+
+
 
 #endif

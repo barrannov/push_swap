@@ -22,43 +22,95 @@ int is_valid(char **str)
 	return (1);
 }
 
-void create_numbers(char **numb, t_ab **a)
+t_ab *create_numbers(char **numb)
 {
 	int i;
 	t_ab *temp;
+	t_ab *a;
+	int len;
 
-	*a = (t_ab *)malloc(sizeof(t_ab));
-	temp = *a;
+	temp = (t_ab *) malloc(sizeof(t_ab));
+	a = temp;
 	i = 1;
-	while(numb[i])
+	while (numb[i])
 	{
 
-		temp = (t_ab *)malloc(sizeof(t_ab));
 		temp->num = ft_atoi(numb[i]);
-		//printf("%d", temp->num);
-		temp->next = (t_ab *)malloc(sizeof(t_ab));
+		temp->next = NULL;
 		i++;
+		temp->next = (t_ab *) malloc(sizeof(t_ab));
 		temp = temp->next;
 
 	}
-	temp->next = NULL;
-	*a = temp;
+	return (a);
 }
+
+void vizual(t_ab *a, t_ab *b)
+{
+	t_ab *na;
+	t_ab *nb;
+
+	na = a;
+	nb = b;
+	printf("/////////////////////////////////////////////////\n");
+	printf("//     %5s %20s           //\n//                                             //\n","Stack A:" ,"Stack B:");
+	while (na != NULL || nb != NULL)
+	{
+		printf("//");
+
+		if (na != NULL)
+		{
+			printf("       %20-d", na->num);
+			na = na->next;
+		}
+		if (na != NULL)
+		{
+			printf("%18-d//", nb->num);
+			nb = nb->next;
+		}
+		else
+		printf("%20s", "//");
+
+		printf("\n");
+	}
+
+	printf("/////////////////////////////////////////////////");
+}
+
+
+
+void ft_push_swap(t_ab *a, t_ab *b)
+{
+
+}
+
+
+
+
+
+
+
+
 
 int main(int arg, char *argv[])
 {
 	t_ab *a;
 	t_ab *b;
 
+	b = NULL;
+	//b->num = 106789567;
+	//b->next = NULL;
 	if (!is_valid(argv))
 	{
 		ft_putstr("Error\n");
 		return (0);
 	}
-	create_numbers(argv, &a);
-	printf("%d", a->num);
+	a = create_numbers(argv);
 
+	printf("%d\n", a->num);
+	//printf("%d\n", amount_list_el(a));
 
+//	vizual(a, a);
 
 //	list = (t_ab *) malloc(sizeof(t_ab));;
 //	list->next = (t_ab*)malloc(sizeof(t_ab));

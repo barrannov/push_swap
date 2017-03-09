@@ -30,7 +30,7 @@ void rra_rrb(t_ab **strc)
 {
 	t_ab *newNode;
 
-	if ((*strc)->num != NULL)
+	if ((*strc) != NULL)
 	{
 		newNode = *strc;
 		while (newNode->next != NULL)
@@ -46,7 +46,7 @@ void ra_rb(t_ab **strc)
 	int t;
 
 
-	if ((*strc)->num != NULL)
+	if ((*strc) != NULL)
 	{
 		t = (*strc)->num;
 		(*strc) = (*strc)->next;

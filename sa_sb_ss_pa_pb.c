@@ -3,7 +3,7 @@
 void pa_pb(t_ab **from, t_ab **to)
 {
 	t_ab *newNode;
-	if ((*from)->num != NULL)
+	if ((*from) != NULL)
 	{
 		newNode = (t_ab *)malloc(sizeof(t_ab));
 		newNode->num = (*from)->num;
@@ -12,7 +12,6 @@ void pa_pb(t_ab **from, t_ab **to)
 			newNode->next = *to;
 		*to = newNode;
 		*from = (*from)->next;
-	//	free(newNode);
 	}
 }
 
