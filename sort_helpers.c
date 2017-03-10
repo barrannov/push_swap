@@ -56,7 +56,7 @@ int is_sorted_list_rev(t_ab *list)
 	}
 	return (1);
 }
-//
+
 //void list_to_array(t_ab *list)
 //{
 //	t_ab *newNode;
@@ -70,7 +70,6 @@ int is_sorted_list_rev(t_ab *list)
 //		newNode = list;
 //		while (newNode->next != NULL)
 //		{
-//
 //			newNode = newNode->next;
 //		}
 //	}
@@ -91,18 +90,20 @@ int sort_by_hand(t_ab **a, t_ab *b)
 	newNode = *a;
 	if (newNode->num > newNode->next->num)
 	{
+		//vizual(*a, *a);
 		sa_sb(newNode);
 		ft_putstr("sa\n");
 	}
-	if (newNode->next->num > newNode->next->next->num)
-	{
-		ra_rb(&newNode);
-		ft_putstr("ra\n");
-		sa_sb(newNode);
-		ft_putstr("sa\n");
-		rra_rrb(&newNode);
-		ft_putstr("rra\n");
-	}
+	if (amount_list_el(*a) == 3)
+		if (newNode->next->num > newNode->next->next->num)
+		{
+			ra_rb(&newNode);
+			ft_putstr("ra\n");
+			sa_sb(newNode);
+			ft_putstr("sa\n");
+			rra_rrb(&newNode);
+			ft_putstr("rra\n");
+		}
 	if (!is_sorted_list(newNode))
 		return sort_by_hand(a, b);
 	return (0);

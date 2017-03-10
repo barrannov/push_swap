@@ -1,18 +1,33 @@
 #include "header.h"
 
-void pa_pb(t_ab **from, t_ab **to)
+
+void deletefirst(t_ab **head)
 {
-	t_ab *newNode;
-	if ((*from) != NULL)
-	{
-		newNode = (t_ab *)malloc(sizeof(t_ab));
-		newNode->num = (*from)->num;
-		newNode->next = NULL;
-		if (*to != NULL)
-			newNode->next = *to;
-		*to = newNode;
-		*from = (*from)->next;
-	}
+	t_ab *tmp = *head;            // save old head for freeing.
+	if (tmp == NULL) return;             // list empty? then do nothing.
+	*head = tmp->next;                   // advance head to second node.
+	//free (tmp);                          // free old head.
+}
+
+void stack_add(t_ab **a, t_ab **b)
+{
+	if (*a)
+		(*b)->next = (*a);
+	*a = *b;
+}
+
+
+void pa_pb(t_ab **a, t_ab **b)
+{
+	t_ab *tmp;
+
+	(void) (*b);
+	if (!(*a))
+		return;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
+	stack_add(b, &tmp);
 }
 
 void sa_sb(t_ab *strc)

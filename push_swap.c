@@ -54,24 +54,25 @@ void vizual(t_ab *a, t_ab *b)
 
 	na = a;
 	nb = b;
-	printf("/////////////////////////////////////////////////\n");
-	printf("//     %5s %20s           //\n//                                             //\n","Stack A:" ,"Stack B:");
-	while (na ->next != NULL || nb ->next != NULL)
+	printf("\n/////////////////////////////////////////////////\n");
+	printf("//     %5s %20s           //\n//                                             //\n", "Stack A:", "Stack B:");
+	while (na != NULL || nb != NULL)
 	{
 		printf("//");
 
-		if (na ->next != NULL)
+		printf("            ");
+		if (na != NULL)
 		{
-			printf("       %20-d", na->num);
+			printf("%d", na->num);
 			na = na->next;
 		}
-		if (nb ->next != NULL)
+		if (nb != NULL)
 		{
-			printf("%18-d//", nb->num);
+			printf("               %d//", nb->num);
 			nb = nb->next;
 		}
 		else
-		printf("%20s", "//");
+			printf("%20s", "//");
 
 		printf("\n");
 	}
@@ -79,26 +80,164 @@ void vizual(t_ab *a, t_ab *b)
 	printf("/////////////////////////////////////////////////");
 }
 
+int find_max(t_ab *a)
+{
+	t_ab *newNode;
+	int max;
+	int cur;
+
+	if (a == NULL)
+		return (0);
+	newNode = a;
+	max = newNode->num;
+	while (newNode->next != NULL)
+	{
+		cur = newNode->num;
+		if (cur > max)
+			max = cur;
+		newNode = newNode->next;
+	}
+	return max;
+}
+
+int find_min(t_ab *a)
+{
+	t_ab *newNode;
+	int min;
+	int cur;
 
 
-void ft_push_swap(t_ab *a, t_ab *b)
+	if (a == NULL)
+		return (0);
+	newNode = a;
+	min = newNode->num;
+	while (newNode->next != NULL)
+	{
+		cur = newNode->num;
+		if (cur < min)
+			min = cur;
+		newNode = newNode->next;
+	}
+	return min;
+}
+
+
+int find_med(t_ab *a)
+{
+	int med;
+	int min;
+	int max;
+
+	max = find_max(a);
+	min = find_min(a);
+	med = (max + min) / 2;
+	return (med);
+}
+
+void fill_b(t_ab **a, t_ab **b)
 {
 
 }
 
+int less_then_med(t_ab *a, int med)
+{
+	t_ab *newNode;
 
 
+	if (a == NULL)
+		return (0);
+	newNode = a;
+	while (newNode->next != NULL)
+	{
+		if (newNode->num <= med)
+			return (1);
+		newNode = newNode->next;
+	}
+	return (0);
+}
 
 
+int partition(t_ab **a, t_ab **b, int size)
+{
+	int med;
+	int count;
 
+	count = 0;
+	med = find_med(*a);
+	while (less_then_med(*a, med))
+	{
+		ra_rb(a);
+		if ((*a)->num <= med)
+		{
+			pa_pb(a, b);
+			count++;
+		}
+	}
+	vizual(*a, *b);
+	return (count);
+}
 
+void move_back(t_ab **a, t_ab **b, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		pa_pb(b, a);
+		i++;
+	}
+}
+
+void ft_push_swapb(t_ab **a, t_ab **b, int size)
+{
+	int n_pushed;
+
+	n_pushed = size;
+	if (size > 3)
+	{
+		n_pushed = partition(a, b, size);
+		ft_push_swapb(b, a, size - n_pushed);
+		move_back(a, b, n_pushed);
+	}
+	else
+	{
+		sort_by_hand(a, *b);
+
+	}
+}
+
+void ft_push_swap(t_ab **a, t_ab **b, int size)
+{
+	int n_pushed;
+
+	n_pushed =size;
+	printf("\n%d", size);
+	if (size > 3)
+	{
+		n_pushed = partition(a, b, size);
+		//vizual(a, b);
+		ft_push_swap(a, b, size - n_pushed);
+	}
+	else
+	{
+		sort_by_hand(a, *b);
+
+	}
+	ft_push_swapb(a, b, size);
+}
 
 
 int main(int arg, char *argv[])
 {
 	t_ab *a;
 	t_ab *b;
+	int res;
+	int size;
 
+	int med;
+
+	res = 0;
 	b = NULL;
 	//b->num = 106789567;
 	//b->next = NULL;
@@ -108,11 +247,12 @@ int main(int arg, char *argv[])
 		return (0);
 	}
 	a = create_numbers(argv);
-
-//	printf("%d\n", a->num);
-	sort_by_hand(&a, b);
-
-	vizual(a, a);
+	size = amount_list_el(a);
+	ft_push_swap(&a, &b, size);
+	//vizual(a, b);
+	fill_b(&a, &b);
+	vizual(a, b);
+	printf("%d\n", a->num);
 
 //	list = (t_ab *) malloc(sizeof(t_ab));;
 //	list->next = (t_ab*)malloc(sizeof(t_ab));
@@ -203,7 +343,5 @@ int main(int arg, char *argv[])
 
 //	printf("%d\n", list2->next->next->next->next->num);
 //	printf("%d\n", list2->next->next->next->next->next->num);
-
-
 	return (0);
 }
