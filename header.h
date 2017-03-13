@@ -27,9 +27,14 @@ void rrr(t_ab *a, t_ab *b);
 
 void rr(t_ab *a, t_ab *b);
 
+void delete(t_ab *head);
+
+void stack_add(t_ab **a, t_ab **b);
+
 /*
  * sort_helpers_f
  */
+
 int amount_list_el(t_ab *list);
 int is_sorted_list(t_ab *list);
 int is_sorted_list_rev(t_ab *list);

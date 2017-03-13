@@ -38,6 +38,20 @@ int is_sorted_list(t_ab *list)
 	return (1);
 }
 
+int is_sorted_list_three(t_ab *list)
+{
+	t_ab *newNode;
+	int i;
+
+	if (list != NULL)
+	{
+		if (list->num < list->next->num && list->next->num < list->next->next->next->num)
+			return (1);
+	}
+	return (0);
+}
+
+
 int is_sorted_list_rev(t_ab *list)
 {
 	t_ab *newNode;
@@ -78,10 +92,14 @@ int is_sorted_list_rev(t_ab *list)
 
 int sort_up(t_ab *a)
 {
-	if (a->num < a->next->num && a->num < a->next->next->num)
+	int w = a->num;
+	int y = a->next->num;
+	int u = a->next->next->num;
+	if (w < y && y < u)
 		return (1);
 	return (0);
 }
+
 
 int sort_by_hand(t_ab **a, t_ab *b)
 {
@@ -94,17 +112,17 @@ int sort_by_hand(t_ab **a, t_ab *b)
 		sa_sb(newNode);
 		ft_putstr("sa\n");
 	}
-	if (amount_list_el(*a) == 3)
-		if (newNode->next->num > newNode->next->next->num)
-		{
-			ra_rb(&newNode);
-			ft_putstr("ra\n");
-			sa_sb(newNode);
-			ft_putstr("sa\n");
-			rra_rrb(&newNode);
-			ft_putstr("rra\n");
-		}
-	if (!is_sorted_list(newNode))
+	//if (amount_list_el(*a) == 3)
+	if (newNode->next->num > newNode->next->next->num)
+	{
+		ra_rb(&newNode);
+		ft_putstr("ra\n");
+		sa_sb(newNode);
+		ft_putstr("sa\n");
+		rra_rrb(&newNode);
+		ft_putstr("rra\n");
+	}
+	if (!sort_up(newNode))
 		return sort_by_hand(a, b);
 	return (0);
 }

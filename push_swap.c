@@ -22,7 +22,7 @@ int is_valid(char **str)
 	return (1);
 }
 
-t_ab *create_numbers(char **numb)
+t_ab *create_numbers(char **numb, int argc)
 {
 	int i;
 	t_ab *temp;
@@ -32,17 +32,21 @@ t_ab *create_numbers(char **numb)
 	temp = (t_ab *) malloc(sizeof(t_ab));
 	a = temp;
 	i = 1;
-	while (numb[i])
+	while (i  < argc)
 	{
-
 		temp->num = ft_atoi(numb[i]);
-		temp->next = NULL;
 		i++;
-		temp->next = (t_ab *) malloc(sizeof(t_ab));
-		temp = temp->next;
-
+		if (numb[i])
+		{
+			temp->next = (t_ab *) malloc(sizeof(t_ab));
+			temp = temp->next;
+		temp->next = NULL;
+		}
+		temp->next = NULL;
 	}
-	temp->next = NULL;
+	printf("NULL: %d\n", temp->num);
+	//free(temp);
+//	temp->next = NULL;
 
 	return (a);
 }
@@ -134,10 +138,6 @@ int find_med(t_ab *a)
 	return (med);
 }
 
-void fill_b(t_ab **a, t_ab **b)
-{
-
-}
 
 int less_then_med(t_ab *a, int med)
 {
@@ -157,6 +157,18 @@ int less_then_med(t_ab *a, int med)
 }
 
 
+void move_back(t_ab **a, t_ab **b, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		pa_pb(b, a);
+		i++;
+	}
+}
+
 int partition(t_ab **a, t_ab **b, int size)
 {
 	int med;
@@ -173,36 +185,24 @@ int partition(t_ab **a, t_ab **b, int size)
 			count++;
 		}
 	}
-	vizual(*a, *b);
 	return (count);
-}
-
-void move_back(t_ab **a, t_ab **b, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		pa_pb(b, a);
-		i++;
-	}
 }
 
 void ft_push_swapb(t_ab **a, t_ab **b, int size)
 {
 	int n_pushed;
 
-	n_pushed = size;
+	printf("\n%d", size);
 	if (size > 3)
 	{
 		n_pushed = partition(a, b, size);
-		ft_push_swapb(b, a, size - n_pushed);
+		vizual(*a, *b);
+		ft_push_swapb(b, a, n_pushed);
 		move_back(a, b, n_pushed);
 	}
 	else
 	{
-		sort_by_hand(a, *b);
+		sort_by_hand(b, *a);
 
 	}
 }
@@ -211,20 +211,21 @@ void ft_push_swap(t_ab **a, t_ab **b, int size)
 {
 	int n_pushed;
 
-	n_pushed =size;
 	printf("\n%d", size);
 	if (size > 3)
 	{
 		n_pushed = partition(a, b, size);
-		//vizual(a, b);
+		vizual(*a, *b);
 		ft_push_swap(a, b, size - n_pushed);
+		vizual(*a, *b);
+		ft_push_swapb(b, a, n_pushed);
+		move_back(a, b, n_pushed);
 	}
 	else
 	{
 		sort_by_hand(a, *b);
 
 	}
-	ft_push_swapb(a, b, size);
 }
 
 
@@ -246,11 +247,13 @@ int main(int arg, char *argv[])
 		ft_putstr("Error\n");
 		return (0);
 	}
-	a = create_numbers(argv);
+	a = create_numbers(argv, arg);
+	vizual(a, b);
+
 	size = amount_list_el(a);
 	ft_push_swap(&a, &b, size);
 	//vizual(a, b);
-	fill_b(&a, &b);
+
 	vizual(a, b);
 	printf("%d\n", a->num);
 
