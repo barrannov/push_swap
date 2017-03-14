@@ -32,7 +32,7 @@ t_ab *create_numbers(char **numb, int argc)
 	temp = (t_ab *) malloc(sizeof(t_ab));
 	a = temp;
 	i = 1;
-	while (i  < argc)
+	while (i < argc)
 	{
 		temp->num = ft_atoi(numb[i]);
 		i++;
@@ -40,7 +40,7 @@ t_ab *create_numbers(char **numb, int argc)
 		{
 			temp->next = (t_ab *) malloc(sizeof(t_ab));
 			temp = temp->next;
-		temp->next = NULL;
+			temp->next = NULL;
 		}
 		temp->next = NULL;
 	}
@@ -84,60 +84,82 @@ void vizual(t_ab *a, t_ab *b)
 	printf("/////////////////////////////////////////////////");
 }
 
-int find_max(t_ab *a)
+int find_max(t_ab *a, int size)
 {
 	t_ab *newNode;
 	int max;
 	int cur;
+	int i;
 
+	i = 0;
 	if (a == NULL)
 		return (0);
 	newNode = a;
 	max = newNode->num;
-	while (newNode->next != NULL)
+	while (i < size && newNode->next != 0)
 	{
 		cur = newNode->num;
 		if (cur > max)
 			max = cur;
 		newNode = newNode->next;
+		i++;
 	}
 	return max;
 }
 
-int find_min(t_ab *a)
+int find_min(t_ab *a, int size)
 {
 	t_ab *newNode;
 	int min;
 	int cur;
+	int i;
 
-
+	i = 0;
 	if (a == NULL)
 		return (0);
 	newNode = a;
 	min = newNode->num;
-	while (newNode->next != NULL)
+	while (i < size)
 	{
 		cur = newNode->num;
 		if (cur < min)
 			min = cur;
 		newNode = newNode->next;
+		i++;
 	}
 	return min;
 }
 
 
-int find_med(t_ab *a)
+int find_med(t_ab *a, int size)
 {
 	int med;
 	int min;
 	int max;
 
-	max = find_max(a);
-	min = find_min(a);
+	max = find_max(a, size);
+	min = find_min(a, size);
 	med = (max + min) / 2;
 	return (med);
 }
 
+
+int more_then_med(t_ab *a, int med)
+{
+	t_ab *newNode;
+
+
+	if (a == NULL)
+		return (0);
+	newNode = a;
+	while (newNode->next != NULL)
+	{
+		if (newNode->num > med)
+			return (1);
+		newNode = newNode->next;
+	}
+	return (0);
+}
 
 int less_then_med(t_ab *a, int med)
 {
@@ -162,10 +184,18 @@ void move_back(t_ab **a, t_ab **b, int size)
 	int i;
 
 	i = 0;
-	while (i < size)
+	while (i < size - 1)
+	{
+		ra_rb(b);
+		vizual(*a, *b);
+		i++;
+	}
+	while (i + 1)
 	{
 		pa_pb(b, a);
-		i++;
+		ra_rb(b);
+		vizual(*a, *b);
+		i--;
 	}
 }
 
@@ -175,11 +205,30 @@ int partition(t_ab **a, t_ab **b, int size)
 	int count;
 
 	count = 0;
-	med = find_med(*a);
+	med = find_med(*a, size);
 	while (less_then_med(*a, med))
 	{
 		ra_rb(a);
 		if ((*a)->num <= med)
+		{
+			pa_pb(a, b);
+			count++;
+		}
+	}
+	return (count);
+}
+
+int partitionB(t_ab **a, t_ab **b, int size)
+{
+	int med;
+	int count;
+
+	count = 0;
+	med = find_med(*a, size);
+	while (more_then_med(*a, med))
+	{
+		ra_rb(a);
+		if ((*a)->num > med)
 		{
 			pa_pb(a, b);
 			count++;
@@ -195,16 +244,15 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size)
 	printf("\n%d", size);
 	if (size > 3)
 	{
-		n_pushed = partition(a, b, size);
+		n_pushed = partitionB(a, b, size);
 		vizual(*a, *b);
-		ft_push_swapb(b, a, n_pushed);
+		ft_push_swapb(a, b, size - n_pushed);
 		move_back(a, b, n_pushed);
 	}
 	else
-	{
-		sort_by_hand(b, *a);
+		sort_by_hand(a, *b);
 
-	}
+
 }
 
 void ft_push_swap(t_ab **a, t_ab **b, int size)
@@ -219,16 +267,15 @@ void ft_push_swap(t_ab **a, t_ab **b, int size)
 		ft_push_swap(a, b, size - n_pushed);
 		vizual(*a, *b);
 		ft_push_swapb(b, a, n_pushed);
+		vizual(*a, *b);
 		move_back(a, b, n_pushed);
+		vizual(*a, *b);
 	}
 	else
-	{
 		sort_by_hand(a, *b);
 
-	}
+
 }
-
-
 int main(int arg, char *argv[])
 {
 	t_ab *a;
@@ -252,6 +299,7 @@ int main(int arg, char *argv[])
 
 	size = amount_list_el(a);
 	ft_push_swap(&a, &b, size);
+
 	//vizual(a, b);
 
 	vizual(a, b);

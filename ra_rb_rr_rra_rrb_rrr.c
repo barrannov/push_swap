@@ -67,7 +67,9 @@ void ra_rb(t_ab **strc)
 	t_ab *tmp;
 	t_ab *end;
 
-	if (!strc || !(*strc)->next)
+	if(*strc == NULL)
+		return;
+	if (!(*strc)->next)
 		return;
 	end = *strc;
 	(*strc) = (*strc)->next;

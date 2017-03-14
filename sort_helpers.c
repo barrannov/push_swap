@@ -10,10 +10,10 @@ int amount_list_el(t_ab *list)
 	if (list != NULL)
 	{
 		newNode = list;
-		while (newNode->next != NULL)
+		while (newNode != NULL)
 		{
-			i++;
 			newNode = newNode->next;
+			i++;
 		}
 	}
 	return (i);
@@ -106,23 +106,26 @@ int sort_by_hand(t_ab **a, t_ab *b)
 	t_ab *newNode;
 
 	newNode = *a;
-	if (newNode->num > newNode->next->num)
+	if (amount_list_el(*a) >= 2)
+		if (newNode->num > newNode->next->num)
+		{
+			//vizual(*a, *a);
+			sa_sb(newNode);
+			ft_putstr("sa\n");
+		}
+	if (amount_list_el(*a) >= 3)
 	{
-		//vizual(*a, *a);
-		sa_sb(newNode);
-		ft_putstr("sa\n");
+		if (newNode->next->num > newNode->next->next->num)
+		{
+			ra_rb(&newNode);
+			ft_putstr("ra\n");
+			sa_sb(newNode);
+			ft_putstr("sa\n");
+			rra_rrb(&newNode);
+			ft_putstr("rra\n");
+		}
+		if (!sort_up(newNode))
+			return sort_by_hand(a, b);
 	}
-	//if (amount_list_el(*a) == 3)
-	if (newNode->next->num > newNode->next->next->num)
-	{
-		ra_rb(&newNode);
-		ft_putstr("ra\n");
-		sa_sb(newNode);
-		ft_putstr("sa\n");
-		rra_rrb(&newNode);
-		ft_putstr("rra\n");
-	}
-	if (!sort_up(newNode))
-		return sort_by_hand(a, b);
 	return (0);
 }
