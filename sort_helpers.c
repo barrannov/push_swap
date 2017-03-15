@@ -100,20 +100,21 @@ int sort_up(t_ab *a)
 	return (0);
 }
 
-
-int sort_by_hand(t_ab **a, t_ab *b)
+int sort_by_hand(t_ab **a, t_ab *b, int size)
 {
 	t_ab *newNode;
 
 	newNode = *a;
-	if (amount_list_el(*a) >= 2)
+	if (size >= 2)
+	{
 		if (newNode->num > newNode->next->num)
 		{
 			//vizual(*a, *a);
 			sa_sb(newNode);
 			ft_putstr("sa\n");
 		}
-	if (amount_list_el(*a) >= 3)
+	}
+	if (size == 3)
 	{
 		if (newNode->next->num > newNode->next->next->num)
 		{
@@ -125,7 +126,7 @@ int sort_by_hand(t_ab **a, t_ab *b)
 			ft_putstr("rra\n");
 		}
 		if (!sort_up(newNode))
-			return sort_by_hand(a, b);
+			return sort_by_hand(a, b, size);
 	}
 	return (0);
 }

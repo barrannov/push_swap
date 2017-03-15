@@ -38,7 +38,7 @@ void stack_add(t_ab **a, t_ab **b);
 int amount_list_el(t_ab *list);
 int is_sorted_list(t_ab *list);
 int is_sorted_list_rev(t_ab *list);
-int sort_by_hand(t_ab **a, t_ab *b);
+int sort_by_hand(t_ab **a, t_ab *b, int size);
 void vizual(t_ab *a, t_ab *b);
 
 

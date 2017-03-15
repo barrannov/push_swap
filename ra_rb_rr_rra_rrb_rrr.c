@@ -27,22 +27,6 @@ void delete(t_ab *head)
 	t->next = NULL;
 }
 
-
-void rra_rrb(t_ab **a)
-{
-	t_ab *tmp;
-	t_ab *end;
-
-	if (!(*a) || !(*a)->next)
-		return;
-	tmp = *a;
-	while (tmp->next->next)
-		tmp = tmp->next;
-	end = tmp->next;
-	tmp->next = NULL;
-	end->next = (*a);
-	(*a) = end;
-}
 //void rra_rrb(t_ab **strc)
 //{
 //	t_ab *newNode;
@@ -60,6 +44,23 @@ void rra_rrb(t_ab **a)
 //		delete(*strc);
 //	}
 //}
+
+void rra_rrb(t_ab **a)
+{
+	t_ab *tmp;
+	t_ab *end;
+
+	if (!(*a) || !(*a)->next)
+		return;
+	tmp = *a;
+	while (tmp->next->next)
+		tmp = tmp->next;
+	end = tmp->next;
+	tmp->next = NULL;
+	end->next = (*a);
+	(*a) = end;
+}
+
 
 
 void ra_rb(t_ab **strc)

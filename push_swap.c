@@ -184,13 +184,13 @@ void move_back(t_ab **a, t_ab **b, int size)
 	int i;
 
 	i = 0;
-	while (i < size - 1)
+	while (i < size)
 	{
 		ra_rb(b);
 		vizual(*a, *b);
 		i++;
 	}
-	while (i + 1)
+	while (i)
 	{
 		pa_pb(b, a);
 		ra_rb(b);
@@ -250,7 +250,7 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size)
 		move_back(a, b, n_pushed);
 	}
 	else
-		sort_by_hand(a, *b);
+		sort_by_hand(a, *b, size);
 
 
 }
@@ -266,15 +266,13 @@ void ft_push_swap(t_ab **a, t_ab **b, int size)
 		vizual(*a, *b);
 		ft_push_swap(a, b, size - n_pushed);
 		vizual(*a, *b);
-		ft_push_swapb(b, a, n_pushed);
+		ft_push_swap(b, a, n_pushed);
 		vizual(*a, *b);
 		move_back(a, b, n_pushed);
 		vizual(*a, *b);
 	}
 	else
-		sort_by_hand(a, *b);
-
-
+		sort_by_hand(a, *b, size);
 }
 int main(int arg, char *argv[])
 {
