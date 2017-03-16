@@ -152,7 +152,7 @@ int more_then_med(t_ab *a, int med)
 	if (a == NULL)
 		return (0);
 	newNode = a;
-	while (newNode->next != NULL)
+	while (newNode)
 	{
 		if (newNode->num > med)
 			return (1);
@@ -169,7 +169,7 @@ int less_then_med(t_ab *a, int med)
 	if (a == NULL)
 		return (0);
 	newNode = a;
-	while (newNode->next != NULL)
+	while (newNode != NULL)
 	{
 		if (newNode->num <= med)
 			return (1);
@@ -190,12 +190,14 @@ void move_back(t_ab **a, t_ab **b, int size)
 		vizual(*a, *b);
 		i++;
 	}
-	while (i)
+
+	while (i--)
 	{
+		rra_rrb(b);
 		pa_pb(b, a);
-		ra_rb(b);
+		//	if(i + 1)
 		vizual(*a, *b);
-		i--;
+		//	i--;
 	}
 }
 
@@ -208,12 +210,14 @@ int partition(t_ab **a, t_ab **b, int size)
 	med = find_med(*a, size);
 	while (less_then_med(*a, med))
 	{
-		ra_rb(a);
+		vizual(*a, *b);
 		if ((*a)->num <= med)
 		{
 			pa_pb(a, b);
 			count++;
 		}
+		else
+			ra_rb(a);
 	}
 	return (count);
 }
@@ -227,15 +231,20 @@ int partitionB(t_ab **a, t_ab **b, int size)
 	med = find_med(*a, size);
 	while (more_then_med(*a, med))
 	{
-		ra_rb(a);
+		vizual(*a, *b);
 		if ((*a)->num > med)
 		{
 			pa_pb(a, b);
 			count++;
 		}
+		else
+			ra_rb(a);
 	}
 	return (count);
 }
+
+void ft_push_swap(t_ab **a, t_ab **b, int size);
+
 
 void ft_push_swapb(t_ab **a, t_ab **b, int size)
 {
@@ -247,9 +256,10 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size)
 		n_pushed = partitionB(a, b, size);
 		vizual(*a, *b);
 		ft_push_swapb(a, b, size - n_pushed);
-		move_back(a, b, n_pushed);
+		ft_push_swap(b, a, n_pushed);
+		//move_back(a, b, n_pushed);
 	}
-	else
+
 		sort_by_hand(a, *b, size);
 
 
@@ -266,14 +276,15 @@ void ft_push_swap(t_ab **a, t_ab **b, int size)
 		vizual(*a, *b);
 		ft_push_swap(a, b, size - n_pushed);
 		vizual(*a, *b);
-		ft_push_swap(b, a, n_pushed);
+		ft_push_swapb(b, a, n_pushed);
 		vizual(*a, *b);
 		move_back(a, b, n_pushed);
 		vizual(*a, *b);
 	}
-	else
+
 		sort_by_hand(a, *b, size);
 }
+
 int main(int arg, char *argv[])
 {
 	t_ab *a;
