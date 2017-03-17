@@ -44,7 +44,7 @@ t_ab *create_numbers(char **numb, int argc)
 		}
 		temp->next = NULL;
 	}
-	printf("NULL: %d\n", temp->num);
+	//printf("NULL: %d\n", temp->num);
 	//free(temp);
 //	temp->next = NULL;
 
@@ -185,7 +185,19 @@ void move_back_b(t_ab **a, t_ab **b, int size)
 	i = 0;
 	while (i < size)
 	{
-		pa_pb(b, a);
+		pb(b, a);
+		i++;
+	}
+}
+
+void move_back_a(t_ab **a, t_ab **b, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		pa(b, a);
 		i++;
 	}
 }
@@ -199,7 +211,7 @@ void move_back(t_ab **a, t_ab **b, int size)
 	while (i < size)
 	{
 		ra_rb(b);
-		vizual(*a, *b);
+	//	vizual(*a, *b);
 		i++;
 	}
 
@@ -208,7 +220,7 @@ void move_back(t_ab **a, t_ab **b, int size)
 		rra_rrb(b);
 		pa_pb(b, a);
 		//	if(i + 1)
-		vizual(*a, *b);
+	//	vizual(*a, *b);
 		//	i--;
 	}
 }
@@ -224,20 +236,20 @@ int partition(t_ab **a, t_ab **b, int size)
 	med = find_med(*a, size);
 	while (less_then_med(*a, med))
 	{
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		if ((*a)->num <= med)
 		{
-			pa_pb(a, b);
+			pa(a, b);
 			count++;
 		}
 		else
 		{
 			j++;
-			ra_rb(a);
+			ra(a);
 		}
 	}
 	while (j--)
-		rra_rrb(a);
+		rra(a);
 	return (count);
 }
 
@@ -252,20 +264,20 @@ int partitionB(t_ab **a, t_ab **b, int size)
 	med = find_med(*a, size);
 	while (more_then_med(*a, med))
 	{
-		vizual(*a, *b);
+	//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pa_pb(a, b);
+			pb(a, b);
 			count++;
 		}
 		else
 		{
 			j++;
-			ra_rb(a);
+			rb(a);
 		}
 	}
 	while (j--)
-		rra_rrb(a);
+		rrb(a);
 	return (count);
 }
 
@@ -280,6 +292,21 @@ int sort_up_b(t_ab *a)
 		return (1);
 	return (0);
 }
+int chacker(t_ab *list)
+{
+	t_ab *new;
+	int temp;
+
+	new = list;
+	while (new->next != NULL)
+	{
+		temp = new->num;
+		new = new->next;
+		if (temp > new->num)
+			return 0;
+	}
+	return (1);
+}
 
 int sort_by_hand_b(t_ab **a, t_ab *b, int size)
 {
@@ -291,9 +318,9 @@ int sort_by_hand_b(t_ab **a, t_ab *b, int size)
 		if (newNode->num < newNode->next->num)
 		{
 			//vizual(*a, *a);
-			sa_sb(&newNode);
-			ft_putstr("sa\n");
-			vizual(*a, b);
+			sb(&newNode);
+		//	ft_putstr("sa\n");
+		//	vizual(*a, b);
 
 		}
 	}
@@ -301,13 +328,13 @@ int sort_by_hand_b(t_ab **a, t_ab *b, int size)
 	{
 		if (newNode->next->num < newNode->next->next->num)
 		{
-			ra_rb(&newNode);
-			ft_putstr("ra\n");
-			sa_sb(&newNode);
-			ft_putstr("sa\n");
-			rra_rrb(&newNode);
-			ft_putstr("rra\n");
-			vizual(*a, b);
+			rb(&newNode);
+		//	ft_putstr("ra\n");
+			sb(&newNode);
+		//	ft_putstr("sa\n");
+			rrb(&newNode);
+		//	ft_putstr("rra\n");
+			//vizual(*a, b);
 		}
 		if (!sort_up_b(newNode))
 			sort_by_hand_b(a, b, size);
@@ -319,46 +346,47 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size)
 {
 	int n_pushed;
 
-	printf("\n%d", size);
+	//printf("\n%d", size);
 	if (size > 3)
 	{
 		n_pushed = partitionB(a, b, size);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		ft_push_swapb(a, b, size - n_pushed);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		ft_push_swap(b, a, n_pushed);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		move_back_b(a, b, n_pushed);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 	}
 	else
 		sort_by_hand_b(a, *b, size);
-
-
 }
 
 void ft_push_swap(t_ab **a, t_ab **b, int size)
 {
 	int n_pushed;
 
-	printf("\n%d", size);
+//	printf("\n%d", size);
 	if (size > 3)
 	{
 		n_pushed = partition(a, b, size);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		ft_push_swap(a, b, size - n_pushed);
-		vizual(*a, *b);
+		//vizual(*a, *b);
 		ft_push_swapb(b, a, n_pushed);
-		vizual(*a, *b);
-		move_back_b(a, b, n_pushed);
-		vizual(*a, *b);
+		//vizual(*a, *b);
+		move_back_a(a, b, n_pushed);
+		//vizual(*a, *b);
 	}
 	else
 		sort_by_hand(a, *b, size);
 }
 
+
+
 int main(int arg, char *argv[])
 {
+
 	t_ab *a;
 	t_ab *b;
 	int size;
@@ -370,11 +398,30 @@ int main(int arg, char *argv[])
 		return (0);
 	}
 	a = create_numbers(argv, arg);
+
+	printf("sorted: ");
+	if (chacker(a))
+	{
+		printf("YES");
+	}
+	else
+		printf("NO");
+
 	vizual(a, b);
 	size = amount_list_el(a);
 	ft_push_swap(&a, &b, size);
 	vizual(a, b);
-	printf("%d\n", a->num);
+
+	printf("\nsorted: ");
+
+	if (chacker(a))
+	{
+		printf("YES");
+	}
+	else
+		printf("NO");
+	printf("\namount numbers: %d", size);
+	printf("\ncount: %d", count);
 
 	return (0);
 }

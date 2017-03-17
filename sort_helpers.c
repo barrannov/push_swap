@@ -110,20 +110,20 @@ int sort_by_hand(t_ab **a, t_ab *b, int size)
 		if (newNode->num > newNode->next->num)
 		{
 			//vizual(*a, *a);
-			sa_sb(&newNode);
-			ft_putstr("sa\n");
+			sa(&newNode);
+		//	ft_putstr("sa\n");
 		}
 	}
 	if (size == 3)
 	{
 		if (newNode->next->num > newNode->next->next->num)
 		{
-			ra_rb(&newNode);
-			ft_putstr("ra\n");
-			sa_sb(&newNode);
-			ft_putstr("sa\n");
-			rra_rrb(&newNode);
-			ft_putstr("rra\n");
+			ra(&newNode);
+		//	ft_putstr("ra\n");
+			sa(&newNode);
+		//	ft_putstr("sa\n");
+			rra(&newNode);
+		//	ft_putstr("rra\n");
 		}
 		if (!sort_up(newNode))
 			return sort_by_hand(a, b, size);

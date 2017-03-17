@@ -13,6 +13,9 @@ typedef struct s_ab {
 /*
  * tools_f
  */
+
+int count;
+
 void sa_sb(t_ab **strc);
 
 void pa_pb(t_ab **from, t_ab **to);
@@ -31,6 +34,14 @@ void delete(t_ab *head);
 
 void stack_add(t_ab **a, t_ab **b);
 
+void rb(t_ab **strc);
+void ra(t_ab **strc);
+void rra(t_ab **strc);
+void rrb(t_ab **strc);
+void sa(t_ab **strc);
+void sb(t_ab **strc);
+void pa(t_ab **from, t_ab **to);
+void pb(t_ab **from, t_ab **to);
 /*
  * sort_helpers_f
  */

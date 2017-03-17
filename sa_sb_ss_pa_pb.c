@@ -16,11 +16,38 @@ void stack_add(t_ab **a, t_ab **b)
 	*a = *b;
 }
 
+void pb(t_ab **a, t_ab **b)
+{
+	t_ab *tmp;
+	printf("\npb");
+	count++;
+	(void) (*b);
+	if (!(*a))
+		return;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
+	stack_add(b, &tmp);
+}
 
+void pa(t_ab **a, t_ab **b)
+{
+	t_ab *tmp;
+	printf("\npa");
+	count++;
+	(void) (*b);
+	if (!(*a))
+		return;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
+	stack_add(b, &tmp);
+}
 void pa_pb(t_ab **a, t_ab **b)
 {
 	t_ab *tmp;
-
+	printf("\npa_pb");
+	count++;
 	(void) (*b);
 	if (!(*a))
 		return;
@@ -33,7 +60,8 @@ void pa_pb(t_ab **a, t_ab **b)
 void sa_sb(t_ab **strc)
 {
 	int t;
-
+	printf("\nsa_sb");
+	count++;
 	if ((*strc) != NULL && (*strc)->next != NULL)
 	{
 		t = (*strc)->next->num;
@@ -42,8 +70,36 @@ void sa_sb(t_ab **strc)
 	}
 }
 
+
+void sa(t_ab **strc)
+{
+	int t;
+	printf("\nsa");
+	count++;
+	if ((*strc) != NULL && (*strc)->next != NULL)
+	{
+		t = (*strc)->next->num;
+		(*strc)->next->num = (*strc)->num;
+		(*strc)->num = t;
+	}
+}
+void sb(t_ab **strc)
+{
+	int t;
+	printf("\nsb");
+	count++;
+	if ((*strc) != NULL && (*strc)->next != NULL)
+	{
+		t = (*strc)->next->num;
+		(*strc)->next->num = (*strc)->num;
+		(*strc)->num = t;
+	}
+}
 void ss(t_ab *a, t_ab *b)
 {
-	sa_sb(a);
-	sa_sb(b);
+	count++;
+	printf("\nss");
+	sa_sb(&a);
+	sa_sb(&b);
 }
+
