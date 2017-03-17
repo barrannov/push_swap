@@ -30,15 +30,15 @@ void pa_pb(t_ab **a, t_ab **b)
 	stack_add(b, &tmp);
 }
 
-void sa_sb(t_ab *strc)
+void sa_sb(t_ab **strc)
 {
 	int t;
 
-	if (strc != NULL && strc->next != NULL)
+	if ((*strc) != NULL && (*strc)->next != NULL)
 	{
-		t = strc->next->num;
-		strc->next->num = strc->num;
-		strc->num = t;
+		t = (*strc)->next->num;
+		(*strc)->next->num = (*strc)->num;
+		(*strc)->num = t;
 	}
 }
 

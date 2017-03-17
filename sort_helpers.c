@@ -110,7 +110,7 @@ int sort_by_hand(t_ab **a, t_ab *b, int size)
 		if (newNode->num > newNode->next->num)
 		{
 			//vizual(*a, *a);
-			sa_sb(newNode);
+			sa_sb(&newNode);
 			ft_putstr("sa\n");
 		}
 	}
@@ -120,7 +120,7 @@ int sort_by_hand(t_ab **a, t_ab *b, int size)
 		{
 			ra_rb(&newNode);
 			ft_putstr("ra\n");
-			sa_sb(newNode);
+			sa_sb(&newNode);
 			ft_putstr("sa\n");
 			rra_rrb(&newNode);
 			ft_putstr("rra\n");

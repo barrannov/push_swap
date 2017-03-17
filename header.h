@@ -13,7 +13,7 @@ typedef struct s_ab {
 /*
  * tools_f
  */
-void sa_sb(t_ab *strc);
+void sa_sb(t_ab **strc);
 
 void pa_pb(t_ab **from, t_ab **to);
 
