@@ -21,6 +21,7 @@ void pb(t_ab **a, t_ab **b)
 	stack_add(b, &tmp);
 }
 
+
 void pa(t_ab **a, t_ab **b)
 {
 	t_ab *tmp;
