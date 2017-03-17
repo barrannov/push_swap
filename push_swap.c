@@ -202,38 +202,42 @@ void move_back_a(t_ab **a, t_ab **b, int size)
 	}
 }
 
-
-void move_back(t_ab **a, t_ab **b, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		ra_rb(b);
-	//	vizual(*a, *b);
-		i++;
-	}
-
-	while (i--)
-	{
-		rra_rrb(b);
-		pa_pb(b, a);
-		//	if(i + 1)
-	//	vizual(*a, *b);
-		//	i--;
-	}
-}
+//
+//void move_back(t_ab **a, t_ab **b, int size)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (i < size)
+//	{
+//		ra_rb(b);
+//		//	vizual(*a, *b);
+//		i++;
+//	}
+//
+//	while (i--)
+//	{
+//		rra_rrb(b);
+//		pa_pb(b, a);
+//		//	if(i + 1)
+//		//	vizual(*a, *b);
+//		//	i--;
+//	}
+//}
 
 int partition(t_ab **a, t_ab **b, int size)
 {
 	int med;
 	int count;
 	int j;
+	int f;
 
+	f = 0;
 	j = 0;
 	count = 0;
 	med = find_med(*a, size);
+	if (amount_list_el(*b) != 0)
+		f = 1;
 	while (less_then_med(*a, med))
 	{
 		//vizual(*a, *b);
@@ -248,8 +252,9 @@ int partition(t_ab **a, t_ab **b, int size)
 			ra(a);
 		}
 	}
-	while (j--)
-		rra(a);
+	if (f == 1)
+		while (j--)
+			rra(a);
 	return (count);
 }
 
@@ -264,7 +269,7 @@ int partitionB(t_ab **a, t_ab **b, int size)
 	med = find_med(*a, size);
 	while (more_then_med(*a, med))
 	{
-	//	vizual(*a, *b);
+		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
 			pb(a, b);
@@ -292,6 +297,7 @@ int sort_up_b(t_ab *a)
 		return (1);
 	return (0);
 }
+
 int chacker(t_ab *list)
 {
 	t_ab *new;
@@ -308,7 +314,7 @@ int chacker(t_ab *list)
 	return (1);
 }
 
-int sort_by_hand_b(t_ab **a, t_ab *b, int size)
+int sort_by_hand_b(t_ab **a, t_ab **b, int size)
 {
 	t_ab *newNode;
 
@@ -317,11 +323,8 @@ int sort_by_hand_b(t_ab **a, t_ab *b, int size)
 	{
 		if (newNode->num < newNode->next->num)
 		{
-			//vizual(*a, *a);
-			sb(&newNode);
-		//	ft_putstr("sa\n");
-		//	vizual(*a, b);
 
+				sb(&newNode);
 		}
 	}
 	if (size == 3)
@@ -329,11 +332,11 @@ int sort_by_hand_b(t_ab **a, t_ab *b, int size)
 		if (newNode->next->num < newNode->next->next->num)
 		{
 			rb(&newNode);
-		//	ft_putstr("ra\n");
+			//	ft_putstr("ra\n");
 			sb(&newNode);
-		//	ft_putstr("sa\n");
+			//	ft_putstr("sa\n");
 			rrb(&newNode);
-		//	ft_putstr("rra\n");
+			//	ft_putstr("rra\n");
 			//vizual(*a, b);
 		}
 		if (!sort_up_b(newNode))
@@ -359,7 +362,7 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size)
 		//vizual(*a, *b);
 	}
 	else
-		sort_by_hand_b(a, *b, size);
+		sort_by_hand_b(a, b, size);
 }
 
 void ft_push_swap(t_ab **a, t_ab **b, int size)
@@ -379,9 +382,8 @@ void ft_push_swap(t_ab **a, t_ab **b, int size)
 		//vizual(*a, *b);
 	}
 	else
-		sort_by_hand(a, *b, size);
+		sort_by_hand(a, b, size);
 }
-
 
 
 int main(int arg, char *argv[])

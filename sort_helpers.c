@@ -100,7 +100,7 @@ int sort_up(t_ab *a)
 	return (0);
 }
 
-int sort_by_hand(t_ab **a, t_ab *b, int size)
+int sort_by_hand(t_ab **a, t_ab **b, int size)
 {
 	t_ab *newNode;
 
@@ -110,8 +110,9 @@ int sort_by_hand(t_ab **a, t_ab *b, int size)
 		if (newNode->num > newNode->next->num)
 		{
 			//vizual(*a, *a);
-			sa(&newNode);
-		//	ft_putstr("sa\n");
+
+				sa(&newNode);
+			//	ft_putstr("sa\n");
 		}
 	}
 	if (size == 3)
@@ -119,11 +120,11 @@ int sort_by_hand(t_ab **a, t_ab *b, int size)
 		if (newNode->next->num > newNode->next->next->num)
 		{
 			ra(&newNode);
-		//	ft_putstr("ra\n");
+			//	ft_putstr("ra\n");
 			sa(&newNode);
-		//	ft_putstr("sa\n");
+			//	ft_putstr("sa\n");
 			rra(&newNode);
-		//	ft_putstr("rra\n");
+			//	ft_putstr("rra\n");
 		}
 		if (!sort_up(newNode))
 			return sort_by_hand(a, b, size);
