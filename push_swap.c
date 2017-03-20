@@ -178,26 +178,26 @@ int less_then_med(t_ab *a, int med)
 	return (0);
 }
 
-void move_back_b(t_ab **a, t_ab **b, int size)
+void move_back_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int i;
 
 	i = 0;
 	while (i < size)
 	{
-		pb(b, a);
+		pb(b, a, moves);
 		i++;
 	}
 }
 
-void move_back_a(t_ab **a, t_ab **b, int size)
+void move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int i;
 
 	i = 0;
 	while (i < size)
 	{
-		pa(b, a);
+		pa(b, a, moves);
 		i++;
 	}
 }
@@ -225,7 +225,7 @@ void move_back_a(t_ab **a, t_ab **b, int size)
 //	}
 //}
 
-int partition(t_ab **a, t_ab **b, int size)
+int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int med;
 	int count;
@@ -240,25 +240,24 @@ int partition(t_ab **a, t_ab **b, int size)
 		f = 1;
 	while (less_then_med(*a, med))
 	{
-		//vizual(*a, *b);
 		if ((*a)->num <= med)
 		{
-			pa(a, b);
+			pa(a, b, moves);
 			count++;
 		}
 		else
 		{
 			j++;
-			ra(a);
+			ra(a, moves);
 		}
 	}
 	if (f == 1)
 		while (j--)
-			rra(a);
+			rra(a, moves);
 	return (count);
 }
 
-int partitionB(t_ab **a, t_ab **b, int size)
+int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int med;
 	int count;
@@ -272,21 +271,21 @@ int partitionB(t_ab **a, t_ab **b, int size)
 		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pb(a, b);
+			pb(a, b, moves);
 			count++;
 		}
 		else
 		{
 			j++;
-			rb(a);
+			rb(a, moves);
 		}
 	}
 	while (j--)
-		rrb(a);
+		rrb(a, moves);
 	return (count);
 }
 
-void ft_push_swap(t_ab **a, t_ab **b, int size);
+void ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves);
 
 int sort_up_b(t_ab *a)
 {
@@ -314,7 +313,7 @@ int chacker(t_ab *list)
 	return (1);
 }
 
-int sort_by_hand_b(t_ab **a, t_ab **b, int size)
+int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	t_ab *newNode;
 
@@ -324,65 +323,65 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size)
 		if (newNode->num < newNode->next->num)
 		{
 
-				sb(&newNode);
+				sb(&newNode, moves);
 		}
 	}
 	if (size == 3)
 	{
 		if (newNode->next->num < newNode->next->next->num)
 		{
-			rb(&newNode);
+			rb(&newNode, moves);
 			//	ft_putstr("ra\n");
-			sb(&newNode);
+			sb(&newNode, moves);
 			//	ft_putstr("sa\n");
-			rrb(&newNode);
+			rrb(&newNode, moves);
 			//	ft_putstr("rra\n");
 			//vizual(*a, b);
 		}
 		if (!sort_up_b(newNode))
-			sort_by_hand_b(a, b, size);
+			sort_by_hand_b(a, b, size, moves);
 	}
 	return (0);
 }
 
-void ft_push_swapb(t_ab **a, t_ab **b, int size)
+void ft_push_swapb(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int n_pushed;
 
 	//printf("\n%d", size);
 	if (size > 3)
 	{
-		n_pushed = partitionB(a, b, size);
+		n_pushed = partitionB(a, b, size, moves);
 		//vizual(*a, *b);
-		ft_push_swapb(a, b, size - n_pushed);
+		ft_push_swapb(a, b, size - n_pushed, moves);
 		//vizual(*a, *b);
-		ft_push_swap(b, a, n_pushed);
+		ft_push_swap(b, a, n_pushed, moves);
 		//vizual(*a, *b);
-		move_back_b(a, b, n_pushed);
+		move_back_b(a, b, n_pushed, moves);
 		//vizual(*a, *b);
 	}
 	else
-		sort_by_hand_b(a, b, size);
+		sort_by_hand_b(a, b, size, moves);
 }
 
-void ft_push_swap(t_ab **a, t_ab **b, int size)
+void ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int n_pushed;
 
 //	printf("\n%d", size);
 	if (size > 3)
 	{
-		n_pushed = partition(a, b, size);
+		n_pushed = partition(a, b, size, moves);
 		//vizual(*a, *b);
-		ft_push_swap(a, b, size - n_pushed);
+		ft_push_swap(a, b, size - n_pushed, moves);
 		//vizual(*a, *b);
-		ft_push_swapb(b, a, n_pushed);
+		ft_push_swapb(b, a, n_pushed, moves);
 		//vizual(*a, *b);
-		move_back_a(a, b, n_pushed);
+		move_back_a(a, b, n_pushed, moves);
 		//vizual(*a, *b);
 	}
 	else
-		sort_by_hand(a, b, size);
+		sort_by_hand(a, b, size, moves);
 }
 
 
@@ -392,7 +391,13 @@ int main(int arg, char *argv[])
 	t_ab *a;
 	t_ab *b;
 	int size;
+	t_ab *moves;
 
+	moves = NULL;
+
+	lst_add(&moves, 5);
+//	lst_add(&moves, 6);
+	//lst_add(&moves, 7);
 	b = NULL;
 	if (!is_valid(argv))
 	{
@@ -403,16 +408,14 @@ int main(int arg, char *argv[])
 
 	printf("sorted: ");
 	if (chacker(a))
-	{
 		printf("YES");
-	}
 	else
 		printf("NO");
 
-	vizual(a, b);
+//	vizual(a, b);
 	size = amount_list_el(a);
-	ft_push_swap(&a, &b, size);
-	vizual(a, b);
+	ft_push_swap(&a, &b, size, moves);
+	//vizual(a, b);
 
 	printf("\nsorted: ");
 
@@ -422,8 +425,19 @@ int main(int arg, char *argv[])
 	}
 	else
 		printf("NO");
+	//Костыль который редактирует баг при котором в лист не добавляются движения если в нем ничего нет
+	moves = moves->next;
+	vizual(moves, moves);
+
+	delete_spare(&moves);
+
+//	vizual(a, b);
+//	delete_first(&a);
+//	vizual(a, b);
+
 	printf("\namount numbers: %d", size);
 	printf("\ncount: %d", count);
-
+	printf("\ncount list: %d", amount_list_el(moves));
+	//vizual(moves, moves);
 	return (0);
 }

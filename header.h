@@ -16,32 +16,38 @@ typedef struct s_ab {
 
 int count;
 
-void sa_sb(t_ab **strc);
+void sa_sb(t_ab **strc, t_ab *moves);
 
-void pa_pb(t_ab **from, t_ab **to);
+void pa_pb(t_ab **from, t_ab **to, t_ab *moves);
 
-void ss(t_ab *a, t_ab *b);
+void ss(t_ab *a, t_ab *b, t_ab *moves);
 
-void ra_rb(t_ab **strc);
+void ra_rb(t_ab **strc, t_ab *moves);
 
-void rra_rrb(t_ab **strc);
+void rra_rrb(t_ab **strc, t_ab *moves);
 
-void rrr(t_ab *a, t_ab *b);
+void rrr(t_ab *a, t_ab *b, t_ab *moves);
 
-void rr(t_ab *a, t_ab *b);
+void rr(t_ab *a, t_ab *b, t_ab *moves);
 
 void delete(t_ab *head);
 
 void stack_add(t_ab **a, t_ab **b);
 
-void rb(t_ab **strc);
-void ra(t_ab **strc);
-void rra(t_ab **strc);
-void rrb(t_ab **strc);
-void sa(t_ab **strc);
-void sb(t_ab **strc);
-void pa(t_ab **from, t_ab **to);
-void pb(t_ab **from, t_ab **to);
+void rb(t_ab **strc, t_ab *moves);
+void ra(t_ab **strc, t_ab *moves);
+void rra(t_ab **strc, t_ab *moves);
+void rrb(t_ab **strc, t_ab *moves);
+void sa(t_ab **strc, t_ab *moves);
+void sb(t_ab **strc, t_ab *moves);
+void pa(t_ab **from, t_ab **to, t_ab *moves);
+void pb(t_ab **from, t_ab **to, t_ab *moves);
+
+void lst_add(t_ab **move, int ind);
+
+void delete_spare(t_ab **moves);
+void delete_first(t_ab **a);
+
 /*
  * sort_helpers_f
  */
@@ -49,7 +55,7 @@ void pb(t_ab **from, t_ab **to);
 int amount_list_el(t_ab *list);
 int is_sorted_list(t_ab *list);
 int is_sorted_list_rev(t_ab *list);
-int sort_by_hand(t_ab **a, t_ab **b, int size);
+int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves);
 void vizual(t_ab *a, t_ab *b);
 
 

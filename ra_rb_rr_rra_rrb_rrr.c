@@ -1,26 +1,26 @@
 #include "header.h"
 
-void rr(t_ab *a, t_ab *b)
-{
-	count++;
-	printf("\nq");
-	ra(&a);
-	rb(&b);
+//void rr(t_ab *a, t_ab *b)
+//{
+//	count++;
+//	printf("\nq");
+//	ra(&a);
+//	rb(&b);
+//
+//}
+//
+//
+//void rrr(t_ab *a, t_ab *b)
+//{
+//	count++;
+//
+//	printf("\nrrr");
+//
+//	rra(&a);
+//	rrb(&b);
+//}
 
-}
-
-
-void rrr(t_ab *a, t_ab *b)
-{
-	count++;
-
-	printf("\nrrr");
-
-	rra(&a);
-	rrb(&b);
-}
-
-void delete(t_ab *head)
+void delete_last(t_ab *head)
 {
 	t_ab *temp = head;
 	t_ab *t;
@@ -36,7 +36,7 @@ void delete(t_ab *head)
 
 
 
-void rrb(t_ab **a)
+void rrb(t_ab **a, t_ab *moves)
 {
 	printf("\nrrb");
 	count++;
@@ -52,9 +52,10 @@ void rrb(t_ab **a)
 	tmp->next = NULL;
 	end->next = (*a);
 	(*a) = end;
+	lst_add(&moves, 10);
 }
 
-void rra(t_ab **a)
+void rra(t_ab **a, t_ab *moves)
 {
 	printf("\nrra");
 	count++;
@@ -70,9 +71,10 @@ void rra(t_ab **a)
 	tmp->next = NULL;
 	end->next = (*a);
 	(*a) = end;
+	lst_add(&moves, 9);
 }
 
-void rb(t_ab **strc)
+void rb(t_ab **strc, t_ab *moves)
 {
 	printf("\nrb");
 	count++;
@@ -90,10 +92,10 @@ void rb(t_ab **strc)
 		tmp = tmp->next;
 	tmp->next = end;
 	end->next = NULL;
-
+	lst_add(&moves, 7);
 }
 
-void ra(t_ab **strc)
+void ra(t_ab **strc, t_ab *moves)
 {
 	printf("\nra");
 	count++;
@@ -111,5 +113,5 @@ void ra(t_ab **strc)
 		tmp = tmp->next;
 	tmp->next = end;
 	end->next = NULL;
-
+	lst_add(&moves, 6);
 }

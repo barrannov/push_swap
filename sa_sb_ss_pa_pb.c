@@ -1,5 +1,27 @@
 #include "header.h"
 
+void lst_add(t_ab **stk, int nbr)
+{
+	t_ab *new;
+	t_ab *tmp;
+
+	new = (t_ab *)malloc(sizeof(t_ab));
+	new->num = nbr;
+	new->next = NULL;
+	if (!(*stk))
+		(*stk) = new;
+	else
+	{
+		tmp = *stk;
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = new;
+	}
+}
+
+
 void stack_add(t_ab **a, t_ab **b)
 {
 	if (*a)
@@ -7,7 +29,7 @@ void stack_add(t_ab **a, t_ab **b)
 	*a = *b;
 }
 
-void pb(t_ab **a, t_ab **b)
+void pb(t_ab **a, t_ab **b, t_ab *moves)
 {
 	t_ab *tmp;
 	printf("\npb");
@@ -19,10 +41,11 @@ void pb(t_ab **a, t_ab **b)
 	(*a) = (*a)->next;
 	tmp->next = NULL;
 	stack_add(b, &tmp);
+	lst_add(&moves, 5);
 }
 
 
-void pa(t_ab **a, t_ab **b)
+void pa(t_ab **a, t_ab **b, t_ab *moves)
 {
 	t_ab *tmp;
 	printf("\npa");
@@ -34,10 +57,10 @@ void pa(t_ab **a, t_ab **b)
 	(*a) = (*a)->next;
 	tmp->next = NULL;
 	stack_add(b, &tmp);
+	lst_add(&moves, 4);
 }
 
-
-void sa(t_ab **strc)
+void sa(t_ab **strc, t_ab *moves)
 {
 	int t;
 	printf("\nsa");
@@ -48,8 +71,11 @@ void sa(t_ab **strc)
 		(*strc)->next->num = (*strc)->num;
 		(*strc)->num = t;
 	}
+	lst_add(&moves, 1);
+
 }
-void sb(t_ab **strc)
+
+void sb(t_ab **strc, t_ab *moves)
 {
 	int t;
 	printf("\nsb");
@@ -60,12 +86,14 @@ void sb(t_ab **strc)
 		(*strc)->next->num = (*strc)->num;
 		(*strc)->num = t;
 	}
-}
-void ss(t_ab *a, t_ab *b)
-{
-	count++;
-	printf("\nss");
-	sa(&a);
-	sb(&b);
+	lst_add(&moves, 2);
+
 }
 
+//void ss(t_ab *a, t_ab *b, t_ab *moves)
+//{
+//	count++;
+//	printf("\nss");
+//	sa(&a, t_ab *moves);
+//	sb(&b);
+//}

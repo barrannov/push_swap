@@ -12,8 +12,9 @@ int amount_list_el(t_ab *list)
 		newNode = list;
 		while (newNode != NULL)
 		{
-			newNode = newNode->next;
+			if(newNode->num != -1)
 			i++;
+			newNode = newNode->next;
 		}
 	}
 	return (i);
@@ -100,7 +101,7 @@ int sort_up(t_ab *a)
 	return (0);
 }
 
-int sort_by_hand(t_ab **a, t_ab **b, int size)
+int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	t_ab *newNode;
 
@@ -111,7 +112,7 @@ int sort_by_hand(t_ab **a, t_ab **b, int size)
 		{
 			//vizual(*a, *a);
 
-				sa(&newNode);
+				sa(&newNode, moves);
 			//	ft_putstr("sa\n");
 		}
 	}
@@ -119,15 +120,15 @@ int sort_by_hand(t_ab **a, t_ab **b, int size)
 	{
 		if (newNode->next->num > newNode->next->next->num)
 		{
-			ra(&newNode);
+			ra(&newNode, moves);
 			//	ft_putstr("ra\n");
-			sa(&newNode);
+			sa(&newNode, moves);
 			//	ft_putstr("sa\n");
-			rra(&newNode);
+			rra(&newNode, moves);
 			//	ft_putstr("rra\n");
 		}
 		if (!sort_up(newNode))
-			return sort_by_hand(a, b, size);
+			return sort_by_hand(a, b, size, moves);
 	}
 	return (0);
 }
