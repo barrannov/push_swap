@@ -51,6 +51,7 @@ t_ab *create_numbers(char **numb, int argc)
 	return (a);
 }
 
+
 void vizual(t_ab *a, t_ab *b)
 {
 	t_ab *na;
@@ -197,7 +198,7 @@ void move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 	i = 0;
 	while (i < size)
 	{
-		pa(b, a, moves);
+		pb(b, a, moves);
 		i++;
 	}
 }
@@ -242,7 +243,7 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		if ((*a)->num <= med)
 		{
-			pa(a, b, moves);
+			pb(a, b, moves);
 			count++;
 		}
 		else
@@ -271,7 +272,7 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pb(a, b, moves);
+			pa(a, b, moves);
 			count++;
 		}
 		else
@@ -313,6 +314,7 @@ int chacker(t_ab *list)
 	return (1);
 }
 
+
 int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	t_ab *newNode;
@@ -323,7 +325,7 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 		if (newNode->num < newNode->next->num)
 		{
 
-				sb(&newNode, moves);
+			sb(&newNode, moves);
 		}
 	}
 	if (size == 3)
@@ -392,6 +394,7 @@ int main(int arg, char *argv[])
 	t_ab *b;
 	int size;
 	t_ab *moves;
+	t_ab *temp_for_num;
 
 	moves = NULL;
 
@@ -405,6 +408,7 @@ int main(int arg, char *argv[])
 		return (0);
 	}
 	a = create_numbers(argv, arg);
+	temp_for_num = create_numbers(argv, arg);
 
 	printf("sorted: ");
 	if (chacker(a))
@@ -425,11 +429,11 @@ int main(int arg, char *argv[])
 	}
 	else
 		printf("NO");
-	//Костыль который редактирует баг при котором в лист не добавляются движения если в нем ничего нет
+//	//Костыль который редактирует баг при котором в лист не добавляются движения если в нем ничего нет
 	moves = moves->next;
-	vizual(moves, moves);
+	//vizual(moves, moves);
 
-	delete_spare(&moves);
+	//delete_spare(&moves);
 
 //	vizual(a, b);
 //	delete_first(&a);
@@ -437,7 +441,20 @@ int main(int arg, char *argv[])
 
 	printf("\namount numbers: %d", size);
 	printf("\ncount: %d", count);
-	printf("\ncount list: %d", amount_list_el(moves));
+	printf("\ncount list: %d\n", amount_list_el(moves));
+	t_ab *temp;
+
+	temp = moves;
+	while (temp)
+	{
+
+		ft_putnbr(temp->num);
+
+			temp = temp->next;
+			ft_putstr("\n");
+	}
+//	vizual(temp_for_num, temp_for_num);
+	check_moves(moves, &temp_for_num);
 	//vizual(moves, moves);
 	return (0);
 }

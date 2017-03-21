@@ -47,6 +47,8 @@ void lst_add(t_ab **move, int ind);
 
 void delete_spare(t_ab **moves);
 void delete_first(t_ab **a);
+int chacker(t_ab *list);
+void check_moves(t_ab *moves, t_ab **a);
 
 /*
  * sort_helpers_f
