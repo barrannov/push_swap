@@ -90,6 +90,7 @@ void deletefirst(t_ab **head)
 	free(tmp);                          // free old head.
 }
 
+
 void delete_pa_pb(t_ab *moves)
 {
 	t_ab *cur;
@@ -105,18 +106,15 @@ void delete_pa_pb(t_ab *moves)
 	j = 0;
 	while (i < cou)
 	{
+		//cou = amount_list_el(cur);
 		if (cur->num == 4 && cur->next->num == 5 || cur->num == 5 && cur->next->num == 4)
 		{
-//			cur->num = -1;
-//			cur = cur->next;
-//			cur->num = -1;
 			deletefirst(&cur);
 			deletefirst(&cur);
-			//while (j--)
-			//	rra_sp(&cur);
+			while (j--)
+				rra_sp(&cur);
 			j = 0;
 			i = 0;
-			//	vizual(cur, cur);
 		}
 		else
 		{
@@ -124,8 +122,6 @@ void delete_pa_pb(t_ab *moves)
 			ra_sp(&cur);
 		}
 		i++;
-
-		//printf("\ncount list: %d", amount_list_el(moves));
 	}
 	while (j--)
 		rra_sp(&cur);

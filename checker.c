@@ -157,7 +157,7 @@ void check_moves(t_ab *moves, t_ab **a)
 	i = amount_list_el(temp);
 	while (temp)
 	{
-		printf("\n%d\n", temp->num);
+		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)
 			sa_ch(a);
 		else if (temp->num == 2)

@@ -50,6 +50,8 @@ void delete_first(t_ab **a);
 int chacker(t_ab *list);
 void check_moves(t_ab *moves, t_ab **a);
 
+int sort_up(t_ab *a);
+
 /*
  * sort_helpers_f
  */

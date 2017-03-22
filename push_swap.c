@@ -243,7 +243,7 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		if ((*a)->num <= med)
 		{
-			pa(a, b, moves);
+			pb(a, b, moves);
 			count++;
 		}
 		else
@@ -253,8 +253,17 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 		}
 	}
 	if (f == 1)
-		while (j--)
-			rra(a, moves);
+	{
+		if (j > amount_list_el(*a) / 2)
+		{
+			j = amount_list_el(*a) - j;
+			while (j--)
+				ra(a, moves);
+		}
+		else
+			while (j--)
+				rra(a, moves);
+	}
 	return (count);
 }
 
@@ -272,7 +281,7 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pb(a, b, moves);
+			pa(a, b, moves);
 			count++;
 		}
 		else
@@ -281,8 +290,16 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 			rb(a, moves);
 		}
 	}
-	while (j--)
-		rrb(a, moves);
+
+	if (j > amount_list_el(*a) / 2)
+	{
+		j = amount_list_el(*a) - j;
+		while (j--)
+			rb(a, moves);
+	}
+	else
+		while (j--)
+			rrb(a, moves);
 	return (count);
 }
 
@@ -304,7 +321,7 @@ int chacker(t_ab *list)
 	int temp;
 
 	new = list;
-	if(list != NULL)
+	if (list != NULL)
 	{
 		while (new->next != NULL)
 		{
@@ -327,8 +344,10 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		if (newNode->num < newNode->next->num)
 		{
-
-			sb(&newNode, moves);
+			if ((*b)->num > (*b)->next->num)
+				ss(*a, *b, moves);
+			else
+				sb(&newNode, moves);
 		}
 	}
 	if (size == 3)
@@ -436,7 +455,7 @@ int main(int arg, char *argv[])
 	moves = moves->next;
 	//vizual(moves, moves);
 
-	//delete_spare(&moves);
+	delete_spare(&moves);
 
 //	vizual(a, b);
 //	delete_first(&a);
@@ -448,14 +467,14 @@ int main(int arg, char *argv[])
 	t_ab *temp;
 
 	temp = moves;
-	while (temp)
-	{
-
-		ft_putnbr(temp->num);
-
-			temp = temp->next;
-			ft_putstr("\n");
-	}
+//	while (temp)
+//	{
+//
+//		ft_putnbr(temp->num);
+//
+//			temp = temp->next;
+//			ft_putstr("\n");
+//	}
 //	vizual(temp_for_num, temp_for_num);
 	check_moves(moves, &temp_for_num);
 	//vizual(moves, moves);
