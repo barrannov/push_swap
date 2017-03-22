@@ -198,7 +198,7 @@ void move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 	i = 0;
 	while (i < size)
 	{
-		pb(b, a, moves);
+		pa(b, a, moves);
 		i++;
 	}
 }
@@ -243,7 +243,7 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		if ((*a)->num <= med)
 		{
-			pb(a, b, moves);
+			pa(a, b, moves);
 			count++;
 		}
 		else
@@ -272,7 +272,7 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pa(a, b, moves);
+			pb(a, b, moves);
 			count++;
 		}
 		else
@@ -304,12 +304,15 @@ int chacker(t_ab *list)
 	int temp;
 
 	new = list;
-	while (new->next != NULL)
+	if(list != NULL)
 	{
-		temp = new->num;
-		new = new->next;
-		if (temp > new->num)
-			return 0;
+		while (new->next != NULL)
+		{
+			temp = new->num;
+			new = new->next;
+			if (temp > new->num)
+				return 0;
+		}
 	}
 	return (1);
 }

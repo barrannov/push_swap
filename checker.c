@@ -143,6 +143,8 @@ void rr_ch(t_ab *a, t_ab *b)
 	rb_ch(&b);
 }
 
+
+//Работает правильно
 void check_moves(t_ab *moves, t_ab **a)
 {
 	t_ab *temp;
@@ -153,8 +155,9 @@ void check_moves(t_ab *moves, t_ab **a)
 	int i;
 
 	i = amount_list_el(temp);
-	while (temp->next)
+	while (temp)
 	{
+		printf("\n%d\n", temp->num);
 		if (temp->num == 1)
 			sa_ch(a);
 		else if (temp->num == 2)
@@ -179,7 +182,6 @@ void check_moves(t_ab *moves, t_ab **a)
 			rrr_ch(*a, b);
 		//vizual(*a, b);
 		temp = temp->next;
-
 	}
 	//pa_ch(&a, &b);
 	vizual(*a, b);
