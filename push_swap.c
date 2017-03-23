@@ -131,17 +131,63 @@ int find_min(t_ab *a, int size)
 	return min;
 }
 
+int *bulb(int *ar)
+{
+	int temp;
+	int i;
+	int t;
+	int j;
+
+	j = 0;
+	i = 1;
+
+	return ar;
+}
 
 int find_med(t_ab *a, int size)
 {
-	int med;
-	int min;
+	int med[size];
 	int max;
+	t_ab *temp;
+	int i;
+	int j;
+	int t;
+	int len;
+	j = 0;
+	i = 0;
+	max = 0;
+	len = 0;
+	temp = a;
 
-	max = find_max(a, size);
-	min = find_min(a, size);
-	med = (max + min) / 2;
-	return (med);
+	while (max < size)
+	{
+		med[max] = temp->num;
+		temp = temp->next;
+		max++;
+	}
+
+	len = max;
+	while (i < len - 1)
+	{
+		while (j < len - i - 1)
+		{
+			if (med[j] > med[j + 1])
+			{
+				t = med[j];
+				med[j] = med[j + 1];
+				med[j + 1] = t;
+				i = 0;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	//res = bulb(med);
+	//max = find_max(a, size);
+	//min = find_min(a, size);
+	//med = (max + min) / 2;
+	return (med[max / 2]);
 }
 
 
@@ -281,8 +327,8 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 		//	vizual(*a, *b);
 		if ((*a)->num >= med)
 		{
-			pa(a, b, moves);
 			count++;
+			pa(a, b, moves);
 		}
 		else
 		{
@@ -403,9 +449,11 @@ void ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves)
 		//vizual(*a, *b);
 		move_back_a(a, b, n_pushed, moves);
 		//vizual(*a, *b);
+
 	}
 	else
 		sort_by_hand(a, b, size, moves);
+
 }
 
 

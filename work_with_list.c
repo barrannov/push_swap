@@ -106,7 +106,7 @@ void delete_pa_pb(t_ab *moves)
 	j = 0;
 	while (i < cou)
 	{
-		//cou = amount_list_el(cur);
+		cou = amount_list_el(cur);
 		if (cur->num == 4 && cur->next->num == 5 || cur->num == 5 && cur->next->num == 4)
 		{
 			deletefirst(&cur);
@@ -116,6 +116,44 @@ void delete_pa_pb(t_ab *moves)
 			j = 0;
 			i = 0;
 		}
+		else if (cur->num == 6 && cur->next->num == 9 || cur->num == 9 && cur->next->num == 6)
+		{
+			deletefirst(&cur);
+			deletefirst(&cur);
+			while (j--)
+				rra_sp(&cur);
+			j = 0;
+			i = 0;
+		}
+		else if (cur->num == 7 && cur->next->num == 10 || cur->num == 10 && cur->next->num == 7)
+		{
+			deletefirst(&cur);
+			deletefirst(&cur);
+			while (j--)
+				rra_sp(&cur);
+			j = 0;
+			i = 0;
+		}
+		else if (cur->num == 7 && cur->next->num == 4 && cur->next->next->num == 10)
+		{
+			deletefirst(&cur);
+			cur->num = 2;
+			cur->next->num = 4;
+			while (j--)
+				rra_sp(&cur);
+			j = 0;
+			i = 0;
+		}
+		 else if (cur->num == 6 && cur->next->num == 5 && cur->next->next->num == 9)
+		 {
+			 deletefirst(&cur);
+			 cur->num = 1;
+			 cur->next->num = 5;
+			 while (j--)
+				 rra_sp(&cur);
+			 j = 0;
+			 i = 0;
+		 }
 		else
 		{
 			j++;
@@ -123,45 +161,13 @@ void delete_pa_pb(t_ab *moves)
 		}
 		i++;
 	}
-	while (j--)
-		rra_sp(&cur);
+	//while (j--)
+	//	rra_sp(&cur);
 }
 
 void delete_spare(t_ab **moves)
 {
-	int i;
-	t_ab *garb;
-	t_ab *cur;
-	int j;
 
-	j = 0;
-	cur = *moves;
-	garb = NULL;
-	i = 0;
 	delete_pa_pb(*moves);
 
-//	while (spare(*moves))
-//	{
-//		if (cur->num == 1 && cur->next->num == 2 || cur->num == 2 && cur->next->num == 1)
-//		{
-//			if (cur->next->num > cur->num)
-//			{
-//				pa_sp(&cur, &garb);
-//				cur->num += 1;
-//			}
-//			else if (cur->num > cur->next->num)
-//			{
-//				pa_sp(&cur, &garb);
-//				cur->num += 2;
-//			}
-//		}
-//		else
-//		{
-//			j++;
-//			ra_sp(&cur);
-//		}
-//		i++;
-//	}
-//	while(j--)
-//		rra_sp(&cur);
 }

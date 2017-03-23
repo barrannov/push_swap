@@ -159,27 +159,68 @@ void check_moves(t_ab *moves, t_ab **a)
 	{
 		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)
+		{
+			printf("\nsa");
 			sa_ch(a);
+		}
 		else if (temp->num == 2)
+		{
+			printf("\nsb");
+
 			sb_ch(&b);
+		}
 		else if (temp->num == 3)
+		{
+			printf("\nss");
+
 			ss_ch(*a, b);
+
+		}
 		else if (temp->num == 4)
+		{
+			printf("\npa");
+
 			pa_ch(&b, a);
+
+		}
 		else if (temp->num == 5)
+		{
+			printf("\npb");
+
 			pb_ch(a, &b);
+		}
 		else if (temp->num == 6)
+		{
+
+			printf("\nra");
 			ra_ch(a);
+		}
 		else if (temp->num == 7)
+		{
+
+			printf("\nrb");
 			rb_ch(&b);
+		}
 		else if (temp->num == 8)
+		{
+			printf("\nrr");
 			rr_ch(*a, b);
+		}
 		else if (temp->num == 9)
+		{
+			printf("\nrra");
 			rra_ch(a);
+		}
 		else if (temp->num == 10)
+		{
+			printf("\nrrb");
 			rrb_ch(&b);
+		}
 		else if (temp->num == 11)
+		{
+			printf("\nrrr");
 			rrr_ch(*a, b);
+		}
 		//vizual(*a, b);
 		temp = temp->next;
 	}
