@@ -183,25 +183,25 @@ int find_med(t_ab *a, int size)
 		j = 0;
 		i++;
 	}
-	//res = bulb(med);
-	//max = find_max(a, size);
-	//min = find_min(a, size);
-	//med = (max + min) / 2;
-	int md = med[max / 2];
+	int md;
+	if(size % 2 == 0)
+		md = med[max / 2 - 1];
+	else
+		md = med[max / 2 + 1];
 	return (md);
 }
 
-//int find_med(t_ab *a, int size)
-//{
-//	int med;
-//	int min;
-//	int max;
-//
-//	max = find_max(a, size);
-//	min = find_min(a, size);
-//	med = (max + min) / 2;
-//	return (med);
-//}
+int find_med_b(t_ab *a, int size)
+{
+	int med;
+	int min;
+	int max;
+
+	max = find_max(a, size);
+	min = find_min(a, size);
+	med = (max + min) / 2;
+	return (med);
+}
 
 int more_then_med(t_ab *a, int med)
 {
@@ -213,7 +213,7 @@ int more_then_med(t_ab *a, int med)
 	newNode = a;
 	while (newNode)
 	{
-		if (newNode->num > med)
+		if (newNode->num >= med)
 			return (1);
 		newNode = newNode->next;
 	}
@@ -330,23 +330,26 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 	int med;
 	int count;
 	int j;
-
+	int f;
 	j = 0;
 	count = 0;
+	f = 0;
 	med = find_med(*a, size);
 //	if (size == 3)
 //	{
 //		if ()
 //	}
 //	else
-	{
+	int t = amount_list_el(*a);
+//	if(t > 3)
+//		f = 1;
 		while (more_then_med(*a, med))
 		{
 			//	vizual(*a, *b);
-			if ((*a)->num >= med)
+			if ((*a)->num >=med)
 			{
-				count++;
 				pa(a, b, moves);
+				count++;
 			}
 			else
 			{
@@ -355,18 +358,16 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 			}
 		}
 
-	}
 
-
-	if (j > amount_list_el(*a) / 2)
-	{
-		j = amount_list_el(*a) - j;
-		while (j--)
-			rb(a, moves);
-	}
-	else
-		while (j--)
-			rrb(a, moves);
+		if (j > amount_list_el(*a) / 2)
+		{
+			j = amount_list_el(*a) - j;
+			while (j--)
+				rb(a, moves);
+		}
+		else
+			while (j--)
+				rrb(a, moves);
 	return (count);
 }
 

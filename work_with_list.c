@@ -109,7 +109,6 @@ int amount(t_ab *list)
 	}
 	return (i);
 }
-
 void delete_pa_pb(t_ab *moves)
 {
 	t_ab *cur;
