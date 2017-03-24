@@ -167,9 +167,9 @@ int find_med(t_ab *a, int size)
 	}
 
 	len = max;
-	while (i < len - 1)
+	while (i < len)
 	{
-		while (j < len - i - 1)
+		while (j < len - i)
 		{
 			if (med[j] > med[j + 1])
 			{
@@ -190,6 +190,17 @@ int find_med(t_ab *a, int size)
 	return (med[max / 2]);
 }
 
+//int find_med(t_ab *a, int size)
+//{
+//	int med;
+//	int min;
+//	int max;
+//
+//	max = find_max(a, size);
+//	min = find_min(a, size);
+//	med = (max + min) / 2;
+//	return (med);
+//}
 
 int more_then_med(t_ab *a, int med)
 {
@@ -390,9 +401,9 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		if (newNode->num < newNode->next->num)
 		{
-			if ((*b)->num > (*b)->next->num)
-				ss(*a, *b, moves);
-			else
+//			if ((*b)->num > (*b)->next->num)
+//				ss(*a, *b, moves);
+//			else
 				sb(&newNode, moves);
 		}
 	}
@@ -488,7 +499,12 @@ int main(int arg, char *argv[])
 
 //	vizual(a, b);
 	size = amount_list_el(a);
-	ft_push_swap(&a, &b, size, moves);
+	int f[2];
+
+	f[0] = size;
+	f[1] = 0;
+	if (!chacker(a))
+		ft_push_swap(&a, &b, size, moves);
 	//vizual(a, b);
 
 	printf("\nsorted: ");
@@ -523,8 +539,8 @@ int main(int arg, char *argv[])
 //			temp = temp->next;
 //			ft_putstr("\n");
 //	}
+	//vizual(moves, moves);
 //	vizual(temp_for_num, temp_for_num);
 	check_moves(moves, &temp_for_num);
-	//vizual(moves, moves);
 	return (0);
 }

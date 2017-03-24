@@ -155,7 +155,7 @@ void check_moves(t_ab *moves, t_ab **a)
 	int i;
 
 	i = amount_list_el(temp);
-	while (temp)
+	while (temp->next)
 	{
 		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)
@@ -220,6 +220,11 @@ void check_moves(t_ab *moves, t_ab **a)
 		{
 			printf("\nrrr");
 			rrr_ch(*a, b);
+		}
+		else
+		{
+			printf("Error");
+			break;
 		}
 		//vizual(*a, b);
 		temp = temp->next;
