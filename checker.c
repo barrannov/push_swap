@@ -155,7 +155,7 @@ void check_moves(t_ab *moves, t_ab **a)
 	int i;
 
 	i = amount_list_el(temp);
-	while (temp->next)
+	while (temp)
 	{
 		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)

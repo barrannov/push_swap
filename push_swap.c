@@ -187,7 +187,8 @@ int find_med(t_ab *a, int size)
 	//max = find_max(a, size);
 	//min = find_min(a, size);
 	//med = (max + min) / 2;
-	return (med[max / 2]);
+	int md = med[max / 2];
+	return (md);
 }
 
 //int find_med(t_ab *a, int size)
@@ -333,20 +334,29 @@ int partitionB(t_ab **a, t_ab **b, int size, t_ab *moves)
 	j = 0;
 	count = 0;
 	med = find_med(*a, size);
-	while (more_then_med(*a, med))
+//	if (size == 3)
+//	{
+//		if ()
+//	}
+//	else
 	{
-		//	vizual(*a, *b);
-		if ((*a)->num >= med)
+		while (more_then_med(*a, med))
 		{
-			count++;
-			pa(a, b, moves);
+			//	vizual(*a, *b);
+			if ((*a)->num >= med)
+			{
+				count++;
+				pa(a, b, moves);
+			}
+			else
+			{
+				j++;
+				rb(a, moves);
+			}
 		}
-		else
-		{
-			j++;
-			rb(a, moves);
-		}
+
 	}
+
 
 	if (j > amount_list_el(*a) / 2)
 	{
@@ -395,15 +405,22 @@ int chacker(t_ab *list)
 int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	t_ab *newNode;
+	t_ab *newNodeb;
 
+	newNodeb = *b;
 	newNode = *a;
 	if (size >= 2)
 	{
 		if (newNode->num < newNode->next->num)
 		{
-//			if ((*b)->num > (*b)->next->num)
-//				ss(*a, *b, moves);
-//			else
+			if (amount_list_el(newNodeb) > 1)
+			{
+				if ((newNodeb)->num > (newNodeb)->next->num)
+					ss(newNode, newNodeb, moves);
+				else
+					sb(&newNode, moves);
+			}
+			else
 				sb(&newNode, moves);
 		}
 	}
@@ -499,13 +516,10 @@ int main(int arg, char *argv[])
 
 //	vizual(a, b);
 	size = amount_list_el(a);
-	int f[2];
 
-	f[0] = size;
-	f[1] = 0;
 	if (!chacker(a))
 		ft_push_swap(&a, &b, size, moves);
-	//vizual(a, b);
+	vizual(a, b);
 
 	printf("\nsorted: ");
 
