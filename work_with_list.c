@@ -60,11 +60,13 @@ static void rra_sp(t_ab **a)
 {
 	t_ab *tmp;
 	t_ab *end;
+	int i;
 
 	if (!(*a) || !(*a)->next)
 		return;
 	tmp = *a;
-	while (tmp->next->next)
+	i = amount_list_el(tmp) - 2;
+	while (i--)
 		tmp = tmp->next;
 	end = tmp->next;
 	tmp->next = NULL;
@@ -72,23 +74,23 @@ static void rra_sp(t_ab **a)
 	(*a) = end;
 }
 
-//
-//void delete_first(t_ab **a)
-//{
-//	t_ab *tmp;
-//	if (!(*a))
-//		return;
-//	tmp = (*a);
-//	(*a) = (*a)->next;
-//	tmp->next = NULL;
-//}
-void deletefirst(t_ab **head)
+
+void deletefirst(t_ab **a)
 {
-	t_ab *tmp = *head;            // save old head for freeing.
-	if (tmp == NULL) return;             // list empty? then do nothing.
-	*head = tmp->next;                   // advance head to second node.
-	free(tmp);                          // free old head.
+	t_ab *tmp;
+	if (!(*a))
+		return;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
 }
+//void deletefirst(t_ab **head)
+//{
+//	t_ab *tmp = *head;            // save old head for freeing.
+//	if (tmp == NULL) return;             // list empty? then do nothing.
+//	*head = tmp->next;                   // advance head to second node.
+//	free(tmp);                          // free old head.
+//}
 
 int amount(t_ab *list)
 {
@@ -109,6 +111,7 @@ int amount(t_ab *list)
 	}
 	return (i);
 }
+
 void delete_pa_pb(t_ab *moves)
 {
 	t_ab *cur;
@@ -192,9 +195,32 @@ void delete_pa_pb(t_ab *moves)
 		rra_sp(&cur);
 }
 
+void delete_ra_rb(t_ab *moves)
+{
+	t_ab *cur;
+	int i;
+
+	i = amount_list_el(moves) - 1;
+	cur = moves;
+	if (!moves)
+		return;
+	while (i--)
+	{
+		if (cur->num == 6 && cur->next->num == 7 || cur->num == 7 && cur->next->num == 6)
+		{
+			deletefirst(&cur);
+			cur->num = 8;
+			cur = moves;
+		}
+		else
+			cur = cur->next;
+	}
+}
+
 void delete_spare(t_ab **moves)
 {
 
+	//delete_ra_rb(*moves);
 	delete_pa_pb(*moves);
 
 }

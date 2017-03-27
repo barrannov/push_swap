@@ -10,12 +10,13 @@ int amount_list_el(t_ab *list)
 	if (list != NULL)
 	{
 		newNode = list;
-		while (newNode != NULL)
+		while (newNode->next != NULL)
 		{
 			i++;
 			newNode = newNode->next;
 		}
 	}
+	i++;
 	return (i);
 }
 

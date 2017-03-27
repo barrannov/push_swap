@@ -452,9 +452,9 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size, t_ab *moves)
 	{
 		n_pushed = partitionB(a, b, size, moves);
 		//vizual(*a, *b);
-		ft_push_swapb(a, b, size - n_pushed, moves);
-		//vizual(*a, *b);
 		ft_push_swap(b, a, n_pushed, moves);
+		//vizual(*a, *b);
+		ft_push_swapb(a, b, size - n_pushed, moves);
 		//vizual(*a, *b);
 		move_back_b(a, b, n_pushed, moves);
 		//vizual(*a, *b);
