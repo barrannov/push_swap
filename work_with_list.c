@@ -112,115 +112,277 @@ int amount(t_ab *list)
 	return (i);
 }
 
-void delete_pa_pb(t_ab *moves)
+//void delete_pa_pb(t_ab *moves)
+//{
+//	t_ab *cur;
+//	int i;
+//
+//	cur = moves;
+////	vizual(cur, cur);
+//	int j;
+//	int cou;
+//
+//	i = 0;
+//	cou = amount_list_el(moves);
+//	j = 0;
+//	while (i < cou)
+//	{
+//		cou = amount_list_el(cur);
+////		if (cur->num == 4 && cur->next->num == 5 || cur->num == 5 && cur->next->num == 4)
+////		{
+////			deletefirst(&cur);
+////			deletefirst(&cur);
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+////		else if (cur->num == 6 && cur->next->num == 9 || cur->num == 9 && cur->next->num == 6)
+////		{
+////			deletefirst(&cur);
+////			deletefirst(&cur);
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+////		else if (cur->num == 1 && cur->next->num == 2 || cur->num == 2 && cur->next->num == 1)
+////		{
+////			deletefirst(&cur);
+////			cur->num = 3;
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+////		else if (cur->num == 7 && cur->next->num == 10 || cur->num == 10 && cur->next->num == 7)
+////		{
+////			deletefirst(&cur);
+////			deletefirst(&cur);
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+////		else if (cur->num == 7 && cur->next->num == 4 && cur->next->next->num == 10)
+////		{
+////			deletefirst(&cur);
+////			cur->num = 2;
+////			cur->next->num = 4;
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+////		else if (cur->num == 6 && cur->next->num == 5 && cur->next->next->num == 9)
+////		{
+////			deletefirst(&cur);
+////			cur->num = 1;
+////			cur->next->num = 5;
+////			while (j--)
+////				rra_sp(&cur);
+////			j = 0;
+////			i = 0;
+////		}
+//		//else
+//		{
+//			j++;
+//			ra_sp(&cur);
+//		}
+//		i++;
+//	}
+//	while (j--)
+//		rra_sp(&cur);
+//}
+
+
+
+
+
+
+void delete_6_5_9(t_ab **moves)
 {
 	t_ab *cur;
-	int i;
+	t_ab *temp;
+	cur = *moves;
 
-	cur = moves;
-//	vizual(cur, cur);
-	int j;
-	int cou;
-
-	i = 0;
-	cou = amount_list_el(moves);
-	j = 0;
-	while (i < cou)
+	while ((cur)->next->next->next)
 	{
-		cou = amount_list_el(cur);
-		if (cur->num == 4 && cur->next->num == 5 || cur->num == 5 && cur->next->num == 4)
+		if (cur->next->num == 6 && cur->next->next->num == 5 && cur->next->next->next->num == 9)
 		{
-			deletefirst(&cur);
-			deletefirst(&cur);
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			cur->next->num = 1;
+			cur->next->next->num = 5;
 		}
-		else if (cur->num == 6 && cur->next->num == 9 || cur->num == 9 && cur->next->num == 6)
+		else if (cur->next->num == 7 && cur->next->next->num == 4 && cur->next->next->next->num == 10)
 		{
-			deletefirst(&cur);
-			deletefirst(&cur);
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
-		}
-		else if (cur->num == 1 && cur->next->num == 2 || cur->num == 2 && cur->next->num == 1)
-		{
-			deletefirst(&cur);
-			cur->num = 3;
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
-		}
-		else if (cur->num == 7 && cur->next->num == 10 || cur->num == 10 && cur->next->num == 7)
-		{
-			deletefirst(&cur);
-			deletefirst(&cur);
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
-		}
-		else if (cur->num == 7 && cur->next->num == 4 && cur->next->next->num == 10)
-		{
-			deletefirst(&cur);
-			cur->num = 2;
-			cur->next->num = 4;
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
-		}
-		else if (cur->num == 6 && cur->next->num == 5 && cur->next->next->num == 9)
-		{
-			deletefirst(&cur);
-			cur->num = 1;
-			cur->next->num = 5;
-			while (j--)
-				rra_sp(&cur);
-			j = 0;
-			i = 0;
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			cur->next->num = 2;
+			cur->next->next->num = 4;
 		}
 		else
-		{
-			j++;
-			ra_sp(&cur);
-		}
-		i++;
+			cur = (cur)->next;
 	}
-	while (j--)
-		rra_sp(&cur);
 }
 
-void delete_ra_rb(t_ab *moves)
+
+
+
+
+void delete_ra_rb(t_ab **moves)
 {
 	t_ab *cur;
-	int i;
+	t_ab *temp;
+	cur = *moves;
 
-	i = amount_list_el(moves) - 1;
-	cur = moves;
-	if (!moves)
-		return;
-	while (i--)
+	while ((cur)->next->next)
 	{
-		if (cur->num == 6 && cur->next->num == 7 || cur->num == 7 && cur->next->num == 6)
+		if (cur->next->num == 6 && cur->next->next->num == 7)
 		{
-			deletefirst(&cur);
-			cur->num = 8;
-			cur = moves;
+			temp = cur->next;
+			cur->next = temp->next;
+			cur->next->num = 8;
+			free(temp);
 		}
 		else
-			cur = cur->next;
+			cur = (cur)->next;
+	}
+}
+
+
+void remove_pa_pb(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	while ((cur)->next->next)
+	{
+		if (cur->next->num == 4 && cur->next->next->num == 5
+			|| cur->next->num == 5 && cur->next->next->num == 4)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			cur = *moves;
+		}
+		else
+			cur = (cur)->next;
+	}
+}
+
+void replace_sa_sb(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	while ((cur)->next->next)
+	{
+		if (cur->next->num == 1 && cur->next->next->num == 2
+			|| cur->next->num == 2 && cur->next->next->num == 1)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			cur->next->num = 3;
+			free(temp);
+		}
+		else
+			cur = (cur)->next;
+	}
+}
+
+void remove_ra_rrb(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	while ((cur)->next->next)
+	{
+		if (cur->next->num == 7 && cur->next->next->num == 10
+			|| cur->next->num == 10 && cur->next->next->num == 7)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+		}
+		else
+			cur = (cur)->next;
+	}
+}
+void remove_6_9(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	while ((cur)->next->next)
+	{
+		if (cur->next->num == 6 && cur->next->next->num == 9
+			|| cur->next->num == 9 && cur->next->next->num == 6)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+		}
+		else
+			cur = (cur)->next;
 	}
 }
 
 void delete_spare(t_ab **moves)
 {
+	remove_pa_pb(moves);
+	//replace_sa_sb(moves);
+	delete_6_5_9(moves);
+	remove_6_9(moves);
+	remove_ra_rrb(moves);
+	delete_ra_rb(moves);
 
-	//delete_ra_rb(*moves);
-	delete_pa_pb(*moves);
 
+
+
+
+
+//	while ((cur)->next->next)
+//	{
+//		if (cur->next->num == 4 && cur->next->next->num == 5
+//			|| cur->next->num == 5 && cur->next->next->num == 4)
+//		{
+//			temp = cur->next;
+//			cur->next = temp->next;
+//			free(temp);
+//			temp = cur->next;
+//			cur->next = temp->next;
+//			free(temp);
+//			cur = *moves;
+//		}
+////		if ((cur)->num == 6 && cur->next->num == 7)
+////		{
+////			deletefirst(&cur);
+////			(cur)->num = 8;
+////		}
+////		else if ((cur)->num == 7 && cur->next->num == 6)
+////		{
+////			deletefirst(&cur);
+////			(cur)->num = 8;
+////		}
+//		else
+//			cur = (cur)->next;
+//	}
+//	*moves = rewrite(cur);
 }

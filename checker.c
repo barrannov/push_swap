@@ -160,72 +160,73 @@ void check_moves(t_ab *moves, t_ab **a)
 		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)
 		{
-			printf("\nsa");
+		//	printf("\nsa");
 			sa_ch(a);
 		}
 		else if (temp->num == 2)
 		{
-			printf("\nsb");
+		//	printf("\nsb");
 
 			sb_ch(&b);
 		}
 		else if (temp->num == 3)
 		{
-			printf("\nss");
+		//	printf("\nss");
 
 			ss_ch(*a, b);
 
 		}
 		else if (temp->num == 4)
 		{
-			printf("\npa");
+			//printf("\npa");
 
 			pa_ch(&b, a);
 
 		}
 		else if (temp->num == 5)
 		{
-			printf("\npb");
+			//printf("\npb");
 
 			pb_ch(a, &b);
 		}
 		else if (temp->num == 6)
 		{
 
-			printf("\nra");
+			//printf("\nra");
 			ra_ch(a);
 		}
 		else if (temp->num == 7)
 		{
 
-			printf("\nrb");
+			//printf("\nrb");
 			rb_ch(&b);
 		}
 		else if (temp->num == 8)
 		{
-			printf("\nrr");
+			//printf("\nrr");
 			rr_ch(*a, b);
 		}
 		else if (temp->num == 9)
 		{
-			printf("\nrra");
+			//printf("\nrra");
 			rra_ch(a);
 		}
 		else if (temp->num == 10)
 		{
-			printf("\nrrb");
+			//printf("\nrrb");
 			rrb_ch(&b);
 		}
 		else if (temp->num == 11)
 		{
-			printf("\nrrr");
+			//printf("\nrrr");
 			rrr_ch(*a, b);
 		}
-		else
-		{
-			printf("Error");
-			break;
-		}
+//		else
+//		{
+//			printf("\nError");
+//			printf("\n%d", temp->num);
+//			break;
+//		}
 		//vizual(*a, b);
 		temp = temp->next;
 	}
