@@ -15,16 +15,28 @@ void ra_rr(t_ab **strc)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = end;
-	//end->next = NULL;
+	end->next = NULL;
 }
 
-void rr(t_ab *a, t_ab *b, t_ab *moves)
+//void rr(t_ab *a, t_ab *b, t_ab *moves)
+//{
+//	count++;
+//	printf("\nrr");
+//	ra_rr(&a);
+//	ra_rr(&b);
+//	lst_add(&moves, 8);
+//}
+
+void rr(t_ab **a, t_ab **b, t_ab *moves)
 {
 	count++;
 	printf("\nrr");
-	ra_rr(&a);
-	ra_rr(&b);
+	ra_rr(a);
+	//vizual(*a,*b);
+	ra_rr(b);
+	//vizual(*a,*b);
 	lst_add(&moves, 8);
+	//vizual(*a,*b);
 }
 
 
@@ -60,17 +72,28 @@ void rra_rrr(t_ab **a)
 	end->next = (*a);
 	(*a) = end;
 }
-
-void rrr(t_ab *a, t_ab *b, t_ab *moves)
+void rrr(t_ab **a, t_ab **b, t_ab *moves)
 {
 	count++;
 
 	printf("\nrrr");
 
-	rra_rrr(&a);
-	rrb_rrr(&b);
+	rra_rrr(a);
+	rrb_rrr(b);
 	lst_add(&moves, 11);
 }
+
+//
+//void rrr(t_ab *a, t_ab *b, t_ab *moves)
+//{
+//	count++;
+//
+//	printf("\nrrr");
+//
+//	rra_rrr(&a);
+//	rrb_rrr(&b);
+//	lst_add(&moves, 11);
+//}
 
 void delete_last(t_ab *head)
 {

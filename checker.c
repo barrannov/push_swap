@@ -221,12 +221,12 @@ void check_moves(t_ab *moves, t_ab **a)
 			//printf("\nrrr");
 			rrr_ch(*a, b);
 		}
-//		else
-//		{
-//			printf("\nError");
-//			printf("\n%d", temp->num);
-//			break;
-//		}
+		else
+		{
+			printf("\nError");
+			printf("\n%d", temp->num);
+			break;
+		}
 		//vizual(*a, b);
 		temp = temp->next;
 	}

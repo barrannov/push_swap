@@ -26,9 +26,9 @@ void ra_rb(t_ab **strc, t_ab *moves);
 
 void rra_rrb(t_ab **strc, t_ab *moves);
 
-void rrr(t_ab *a, t_ab *b, t_ab *moves);
+void rrr(t_ab **a, t_ab **b, t_ab *moves);
 
-void rr(t_ab *a, t_ab *b, t_ab *moves);
+void rr(t_ab **a, t_ab **b, t_ab *moves);
 
 void delete(t_ab *head);
 
@@ -51,6 +51,7 @@ int chacker(t_ab *list);
 void check_moves(t_ab *moves, t_ab **a);
 
 int sort_up(t_ab *a);
+int sort_up_b(t_ab *a);
 
 /*
  * sort_helpers_f

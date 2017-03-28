@@ -346,13 +346,12 @@ void remove_6_9(t_ab **moves)
 
 void delete_spare(t_ab **moves)
 {
-	remove_pa_pb(moves);
-	//replace_sa_sb(moves);
+	replace_sa_sb(moves);
 	delete_6_5_9(moves);
 	remove_6_9(moves);
 	remove_ra_rrb(moves);
 	delete_ra_rb(moves);
-
+	remove_pa_pb(moves);
 
 
 

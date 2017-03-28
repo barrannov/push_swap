@@ -102,6 +102,30 @@ int sort_up(t_ab *a)
 	return (0);
 }
 
+void easy_sort(t_ab *a, t_ab *moves)
+{
+	printf("\nssssafds");
+	if (sort_up(a))
+		return;
+	if (sort_up_b(a))
+	{
+		sa(&a, moves);
+		ra(&a, moves);
+	}
+	if (a->num > a->next->num < a->next->next->num && a->num < a->next->next->num)
+		sa(&a, moves);
+	if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+		ra(&a, moves);
+	if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+		ra(&a, moves);
+	if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
+	{
+		rra(&a, moves);
+		sa(&a, moves);
+	}
+
+}
+
 int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	t_ab *newNode;
@@ -109,57 +133,72 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 
 	newNodeb = *b;
 	newNode = *a;
-	if (size >= 2)
-	{
-		if (newNode->num > newNode->next->num)
-		{
-			//vizual(*a, *a);
 
-			if (amount_list_el(newNodeb) > 1)
+	if (amount_list_el(*a) == 3)
+
+			easy_sort(*a, moves);
+
+	else
+	{
+		if (size >= 2)
+		{
+			if (newNode->num > newNode->next->num)
 			{
-				if ((newNodeb)->num < (newNodeb)->next->num)
-					ss(newNode, newNodeb, moves);
+				//vizual(*a, *a);
+
+				if (amount_list_el(newNodeb) > 1)
+				{
+					if ((newNodeb)->num < (newNodeb)->next->num)
+						ss(newNode, newNodeb, moves);
+					else
+						sa(&newNode, moves);
+				}
 				else
 					sa(&newNode, moves);
-			}
-			else
-				sa(&newNode, moves);
-			//	ft_putstr("sa\n");
-		}
-	}
-	if (size == 3)
-	{
-		if (newNode->next->num > newNode->next->next->num)
-		{
-//			if (amount_list_el(newNodeb) > 2)
-//			{
-//				if ((*b)->next->num < (*b)->next->next->num)
-//				{
-//					rr(newNode, newNodeb, moves);
-//					ss(newNode, newNodeb, moves);
-//					rrr(newNode, newNodeb, moves);
-//
-//				}
-//				else
-//				{
-//					ra(&newNode, moves);
-//					//	ft_putstr("ra\n");
-//					sa(&newNode, moves);
-//					//	ft_putstr("sa\n");
-//					rra(&newNode, moves);
-//				}
-//			}
-//			else
-//			{
-				ra(&newNode, moves);
-				//	ft_putstr("ra\n");
-				sa(&newNode, moves);
 				//	ft_putstr("sa\n");
-				rra(&newNode, moves);
-		//	}//	ft_putstr("rra\n");
+			}
 		}
-		if (!sort_up(newNode))
-			return sort_by_hand(&newNode, b, size, moves);
+		if (size == 3)
+		{
+			if (newNode->next->num > newNode->next->next->num)
+			{
+				if (amount_list_el(newNodeb) > 2)
+				{
+					if ((*b)->next->num < (*b)->next->next->num)
+					{
+						rr(&newNode, &newNodeb, moves);
+						ss(newNode, newNodeb, moves);
+						rrr(&newNode, &newNodeb, moves);
+
+					}
+					else
+					{
+						ra(&newNode, moves);
+						//	ft_putstr("ra\n");
+						if ((newNodeb)->num < (newNodeb)->next->num)
+							ss(newNode, newNodeb, moves);
+						else
+							sa(&newNode, moves);
+						//	ft_putstr("sa\n");
+						rra(&newNode, moves);
+					}
+				}
+				else
+				{
+					ra(&newNode, moves);
+					//	ft_putstr("ra\n");
+					if ((newNodeb)->num < (newNodeb)->next->num)
+						ss(newNode, newNodeb, moves);
+					else
+						sa(&newNode, moves);
+					//sa(&newNode, moves);
+					//	ft_putstr("sa\n");
+					rra(&newNode, moves);
+				}//	ft_putstr("rra\n");
+			}
+			if (!sort_up(newNode))
+				return sort_by_hand(&newNode, b, size, moves);
+		}
 	}
 	return (0);
 }
