@@ -187,9 +187,9 @@ int find_med(t_ab *a, int size)
 //	if (size % 2 == 1)
 	md = med[size / 2];
 	if (size % 2 == 0)
-		md = med[max / 2 - 1];
+		md = med[size / 2 + 1];
 	else
-		md = med[max / 2 + 1];
+		md = med[size / 2];
 	return (md);
 }
 
@@ -350,6 +350,9 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 		f = 1;
 	while (less_then_med(*a, med))
 	{
+//		if(amount_list_el(*a) == 3)
+//			break;
+
 		if ((*a)->num <= med)
 		{
 			pb(a, b, moves);
@@ -361,6 +364,7 @@ int partition(t_ab **a, t_ab **b, int size, t_ab *moves)
 			ra(a, moves);
 		}
 	}
+	vizual(*a, *b);
 	if (f == 1)
 	{
 		if (j > amount_list_el(*a) / 2)
@@ -456,24 +460,23 @@ int chacker(t_ab *list)
 
 void easy_sort_b(t_ab *a, t_ab *moves)
 {
-	printf("\nssssafds");
 	if (sort_up_b(a))
 		return;
 	if (sort_up(a))
 	{
-		sa(&a, moves);
-		ra(&a, moves);
+		sb(&a, moves);
+		rb(&a, moves);
 	}
-	if (a->num < a->next->num > a->next->next->num && a->num > a->next->next->num)
-		sa(&a, moves);
-	if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
-		ra(&a, moves);
-	if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
-		ra(&a, moves);
-	if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+	if (a->num < a->next->num && a->next->num > a->next->next->num && a->num > a->next->next->num)
+		sb(&a, moves);
+	if (a->num < a->next->num && a->next->num > a->next->next->num && a->num < a->next->next->num)
+		rb(&a, moves);
+	if (a->num < a->next->num && a->next->num> a->next->next->num && a->num < a->next->next->num)
+		rb(&a, moves);
+	if (a->num > a->next->num && a->next->num< a->next->next->num && a->num > a->next->next->num)
 	{
-		rra(&a, moves);
-		sa(&a, moves);
+		rrb(&a, moves);
+		sb(&a, moves);
 	}
 
 }
@@ -485,6 +488,9 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 
 	newNodeb = *b;
 	newNode = *a;
+
+	vizual(*a, *b);
+
 	if (amount_list_el(*a) == 3)
 
 		easy_sort_b(*a, moves);
@@ -521,14 +527,14 @@ int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 					}
 					else
 					{
-						ra(&newNode, moves);
+						rb(&newNode, moves);
 						//	ft_putstr("ra\n");
 						if ((newNodeb)->num > (newNodeb)->next->num)
 							ss(newNode, newNodeb, moves);
 						else
-							sa(&newNode, moves);
+							sb(&newNode, moves);
 						//	ft_putstr("sa\n");
-						rra(&newNode, moves);
+						rrb(&newNode, moves);
 					}
 				}
 				else
@@ -557,7 +563,7 @@ void ft_push_swapb(t_ab **a, t_ab **b, int size, t_ab *moves)
 	int n_pushed;
 
 	//printf("\n%d", size);
-	vizual(*b, *a);
+//	vizual(*b, *a);
 
 	if (size > 3)
 	{
@@ -578,7 +584,7 @@ void ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves)
 	int n_pushed;
 
 //	printf("\n%d", size);
-	vizual(*a, *b);
+//	vizual(*a, *b);
 
 	if (size > 3)
 	{
@@ -593,7 +599,10 @@ void ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves)
 
 	}
 	else
+	{
 		sort_by_hand(a, b, size, moves);
+
+	}
 
 }
 

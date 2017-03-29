@@ -104,7 +104,7 @@ int sort_up(t_ab *a)
 
 void easy_sort(t_ab *a, t_ab *moves)
 {
-	printf("\nssssafds");
+
 	if (sort_up(a))
 		return;
 	if (sort_up_b(a))
@@ -134,18 +134,15 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 	newNodeb = *b;
 	newNode = *a;
 
+	//vizual(*a, *b);
 	if (amount_list_el(*a) == 3)
-
-			easy_sort(*a, moves);
-
+		easy_sort(*a, moves);
 	else
 	{
 		if (size >= 2)
 		{
 			if (newNode->num > newNode->next->num)
 			{
-				//vizual(*a, *a);
-
 				if (amount_list_el(newNodeb) > 1)
 				{
 					if ((newNodeb)->num < (newNodeb)->next->num)
@@ -155,7 +152,6 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 				}
 				else
 					sa(&newNode, moves);
-				//	ft_putstr("sa\n");
 			}
 		}
 		if (size == 3)
@@ -179,7 +175,6 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 							ss(newNode, newNodeb, moves);
 						else
 							sa(&newNode, moves);
-						//	ft_putstr("sa\n");
 						rra(&newNode, moves);
 					}
 				}

@@ -131,16 +131,16 @@ void ra_ch(t_ab **strc)
 }
 
 
-void rrr_ch(t_ab *a, t_ab *b)
+void rrr_ch(t_ab **a, t_ab **b)
 {
-	rra_ch(&a);
-	rrb_ch(&b);
+	rra_ch(a);
+	rrb_ch(b);
 }
 
-void rr_ch(t_ab *a, t_ab *b)
+void rr_ch(t_ab **a, t_ab **b)
 {
-	ra_ch(&a);
-	rb_ch(&b);
+	ra_ch(a);
+	rb_ch(b);
 }
 
 
@@ -160,66 +160,66 @@ void check_moves(t_ab *moves, t_ab **a)
 		//printf("\n%d\n", temp->num);
 		if (temp->num == 1)
 		{
-		//	printf("\nsa");
+			printf("\nsa");
 			sa_ch(a);
 		}
 		else if (temp->num == 2)
 		{
-		//	printf("\nsb");
+			printf("\nsb");
 
 			sb_ch(&b);
 		}
 		else if (temp->num == 3)
 		{
-		//	printf("\nss");
+			printf("\nss");
 
 			ss_ch(*a, b);
 
 		}
 		else if (temp->num == 4)
 		{
-			//printf("\npa");
+			printf("\npa");
 
 			pa_ch(&b, a);
 
 		}
 		else if (temp->num == 5)
 		{
-			//printf("\npb");
+			printf("\npb");
 
 			pb_ch(a, &b);
 		}
 		else if (temp->num == 6)
 		{
 
-			//printf("\nra");
+			printf("\nra");
 			ra_ch(a);
 		}
 		else if (temp->num == 7)
 		{
 
-			//printf("\nrb");
+			printf("\nrb");
 			rb_ch(&b);
 		}
 		else if (temp->num == 8)
 		{
-			//printf("\nrr");
-			rr_ch(*a, b);
+			printf("\nrr");
+			rr_ch(a, &b);
 		}
 		else if (temp->num == 9)
 		{
-			//printf("\nrra");
+			printf("\nrra");
 			rra_ch(a);
 		}
 		else if (temp->num == 10)
 		{
-			//printf("\nrrb");
+			printf("\nrrb");
 			rrb_ch(&b);
 		}
 		else if (temp->num == 11)
 		{
-			//printf("\nrrr");
-			rrr_ch(*a, b);
+			printf("\nrrr");
+			rrr_ch(a, &b);
 		}
 		else
 		{
