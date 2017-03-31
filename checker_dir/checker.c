@@ -2,7 +2,7 @@
 // Created by Aleksandr Baranov on 3/21/17.
 //
 
-#include "header.h"
+#include "../header.h"
 
 
 void pb_ch(t_ab **a, t_ab **b)
@@ -106,11 +106,6 @@ void rb_ch(t_ab **strc)
 	end->next = NULL;
 }
 
-void ss_ch(t_ab *a, t_ab *b)
-{
-	sa_ch(&a);
-	sb_ch(&b);
-}
 
 void ra_ch(t_ab **strc)
 {
@@ -130,6 +125,11 @@ void ra_ch(t_ab **strc)
 	end->next = NULL;
 }
 
+void ss_ch(t_ab *a, t_ab *b)
+{
+	sa_ch(&a);
+	sb_ch(&b);
+}
 
 void rrr_ch(t_ab **a, t_ab **b)
 {
