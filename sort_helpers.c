@@ -113,13 +113,15 @@ void easy_sort(t_ab *a, t_ab *moves)
 		sa(&a, moves);
 		rra(&a, moves);
 	}
-	else if (a->num > a->next->num < a->next->next->num && a->num < a->next->next->num)
+	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num < a->next->next->num)
 		sa(&a, moves);
-	else if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	else if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num < a->next->num && a->next->num > a->next->next->num && a->num > a->next->next->num)
+		rra(&a, moves);
+	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	else if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
+	else if (a->num < a->next->num && a->next->num > a->next->next->num && a->num < a->next->next->num)
 	{
 		rra(&a, moves);
 		sa(&a, moves);
@@ -203,3 +205,38 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 	}
 	return (0);
 }
+
+
+/*
+
+int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
+{
+	t_ab *newNode;
+
+	newNode = *a;
+	if (size >= 2)
+	{
+		if (newNode->num > newNode->next->num)
+		{
+			//vizual(*a, *a);
+
+			sa(&newNode, moves);
+			//	ft_putstr("sa\n");
+		}
+	}
+	if (size == 3)
+	{
+		if (newNode->next->num > newNode->next->next->num)
+		{
+			ra(&newNode, moves);
+			//	ft_putstr("ra\n");
+			sa(&newNode, moves);
+			//	ft_putstr("sa\n");
+			rra(&newNode, moves);
+			//	ft_putstr("rra\n");
+		}
+		if (!sort_up(newNode))
+			return sort_by_hand(a, b, size, moves);
+	}
+	return (0);
+}*/

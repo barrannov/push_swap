@@ -471,6 +471,8 @@ void easy_sort_b(t_ab *a, t_ab *moves)
 		sb(&a, moves);
 	if (a->num < a->next->num && a->next->num > a->next->next->num && a->num < a->next->next->num)
 		rb(&a, moves);
+	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num < a->next->next->num)
+		rra(&a, moves);
 	if (a->num < a->next->num && a->next->num> a->next->next->num && a->num < a->next->next->num)
 		rb(&a, moves);
 	if (a->num > a->next->num && a->next->num< a->next->next->num && a->num > a->next->next->num)

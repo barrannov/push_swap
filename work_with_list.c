@@ -112,88 +112,40 @@ int amount(t_ab *list)
 	return (i);
 }
 
-//void delete_pa_pb(t_ab *moves)
-//{
-//	t_ab *cur;
-//	int i;
-//
-//	cur = moves;
-////	vizual(cur, cur);
-//	int j;
-//	int cou;
-//
-//	i = 0;
-//	cou = amount_list_el(moves);
-//	j = 0;
-//	while (i < cou)
-//	{
-//		cou = amount_list_el(cur);
-////		if (cur->num == 4 && cur->next->num == 5 || cur->num == 5 && cur->next->num == 4)
-////		{
-////			deletefirst(&cur);
-////			deletefirst(&cur);
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-////		else if (cur->num == 6 && cur->next->num == 9 || cur->num == 9 && cur->next->num == 6)
-////		{
-////			deletefirst(&cur);
-////			deletefirst(&cur);
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-////		else if (cur->num == 1 && cur->next->num == 2 || cur->num == 2 && cur->next->num == 1)
-////		{
-////			deletefirst(&cur);
-////			cur->num = 3;
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-////		else if (cur->num == 7 && cur->next->num == 10 || cur->num == 10 && cur->next->num == 7)
-////		{
-////			deletefirst(&cur);
-////			deletefirst(&cur);
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-////		else if (cur->num == 7 && cur->next->num == 4 && cur->next->next->num == 10)
-////		{
-////			deletefirst(&cur);
-////			cur->num = 2;
-////			cur->next->num = 4;
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-////		else if (cur->num == 6 && cur->next->num == 5 && cur->next->next->num == 9)
-////		{
-////			deletefirst(&cur);
-////			cur->num = 1;
-////			cur->next->num = 5;
-////			while (j--)
-////				rra_sp(&cur);
-////			j = 0;
-////			i = 0;
-////		}
-//		//else
-//		{
-//			j++;
-//			ra_sp(&cur);
-//		}
-//		i++;
-//	}
-//	while (j--)
-//		rra_sp(&cur);
-//}
+void delete_pa_pb(t_ab *moves)
+{
+	t_ab *cur;
+	int i;
+
+	cur = moves;
+	int j;
+	int cou;
+
+	i = 0;
+	cou = amount_list_el(moves);
+	j = 0;
+	while (i < cou)
+	{
+		cou = amount_list_el(cur);
+		if (cur->num == 6 && cur->next->num == 9 || cur->num == 9 && cur->next->num == 6)
+		{
+			deletefirst(&cur);
+			deletefirst(&cur);
+			while (j--)
+				rra_sp(&cur);
+			j = 0;
+			i = 0;
+		}
+		else
+		{
+			j++;
+			ra_sp(&cur);
+		}
+		i++;
+	}
+	while (j--)
+		rra_sp(&cur);
+}
 
 
 
@@ -412,14 +364,14 @@ void remove_6_9(t_ab **moves)
 
 void delete_spare(t_ab **moves)
 {
-	replace_sa_sb(moves);
+//	replace_sa_sb(moves);
 	delete_6_5_9(moves);
 	remove_6_9(moves);
 	remove_ra_rrb(moves);
 	delete_ra_rb(moves);
 	remove_pa_pb(moves);
 	delete_1_6_5(moves);
-	remove_sa_sa(moves);
+	delete_pa_pb(*moves);
 
 
 
