@@ -8,7 +8,7 @@ void lst_add(t_ab **stk, int nbr)
 	new = (t_ab *)malloc(sizeof(t_ab));
 	new->num = nbr;
 	new->next = NULL;
-	if (!(*stk))
+	if (*stk == NULL)
 		(*stk) = new;
 	else
 	{

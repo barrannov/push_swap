@@ -187,9 +187,9 @@ int find_med(t_ab *a, int size)
 //	if (size % 2 == 1)
 	md = med[size / 2];
 	if (size % 2 == 0)
-		md = med[size / 2 + 1];
+		md = med[size / 2 - 1];
 	else
-		md = med[size / 2];
+		md = med[size / 2 + 1];
 	return (md);
 }
 
@@ -678,6 +678,7 @@ int main(int arg, char *argv[])
 //	}
 	//vizual(moves, moves);
 //	vizual(temp_for_num, temp_for_num);
+	if(amount_list_el(moves) != 0)
 	check_moves(moves, &temp_for_num);
 	return (0);
 }

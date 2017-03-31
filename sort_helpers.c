@@ -105,20 +105,21 @@ int sort_up(t_ab *a)
 void easy_sort(t_ab *a, t_ab *moves)
 {
 
+
 	if (sort_up(a))
 		return;
-	if (sort_up_b(a))
+	else if (sort_up_b(a))
 	{
 		sa(&a, moves);
-		ra(&a, moves);
+		rra(&a, moves);
 	}
-	if (a->num > a->next->num < a->next->next->num && a->num < a->next->next->num)
+	else if (a->num > a->next->num < a->next->next->num && a->num < a->next->next->num)
 		sa(&a, moves);
-	if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num > a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
+	else if (a->num < a->next->num > a->next->next->num && a->num < a->next->next->num)
 	{
 		rra(&a, moves);
 		sa(&a, moves);
@@ -182,9 +183,14 @@ int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
 				{
 					ra(&newNode, moves);
 					//	ft_putstr("ra\n");
-					if ((newNodeb)->num < (newNodeb)->next->num)
-						ss(newNode, newNodeb, moves);
-					else
+					if (amount_list_el(newNodeb) > 2)
+					{
+
+						if ((newNodeb)->num < (newNodeb)->next->num)
+							ss(newNode, newNodeb, moves);
+						else
+							sa(&newNode, moves);
+					}
 						sa(&newNode, moves);
 					//sa(&newNode, moves);
 					//	ft_putstr("sa\n");

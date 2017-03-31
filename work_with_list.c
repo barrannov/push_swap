@@ -206,6 +206,8 @@ void delete_6_5_9(t_ab **moves)
 	t_ab *temp;
 	cur = *moves;
 
+	if(amount_list_el(*moves) < 3)
+		return;
 	while ((cur)->next->next->next)
 	{
 		if (cur->next->num == 6 && cur->next->next->num == 5 && cur->next->next->next->num == 9)
@@ -229,6 +231,37 @@ void delete_6_5_9(t_ab **moves)
 	}
 }
 
+void delete_1_6_5(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	if(amount_list_el(*moves) < 3)
+		return;
+	while ((cur)->next->next->next)
+	{
+		if (cur->next->num == 1 && cur->next->next->num == 6 && cur->next->next->next->num == 5)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			cur->next->num = 5;
+			cur->next->next->num = 6;
+		}
+		else if (cur->next->num == 9 && cur->next->next->num == 1 && cur->next->next->next->num == 5)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			cur->next->num = 5;
+			cur->next->next->num = 9;
+		}
+		else
+			cur = (cur)->next;
+	}
+}
+
 
 
 
@@ -239,6 +272,8 @@ void delete_ra_rb(t_ab **moves)
 	t_ab *temp;
 	cur = *moves;
 
+	if(amount_list_el(*moves) < 3)
+		return;
 	while ((cur)->next->next)
 	{
 		if (cur->next->num == 6 && cur->next->next->num == 7)
@@ -260,6 +295,8 @@ void remove_pa_pb(t_ab **moves)
 	t_ab *temp;
 	cur = *moves;
 
+	if(amount_list_el(*moves) < 3)
+		return;
 	while ((cur)->next->next)
 	{
 		if (cur->next->num == 4 && cur->next->next->num == 5
@@ -284,6 +321,8 @@ void replace_sa_sb(t_ab **moves)
 	t_ab *temp;
 	cur = *moves;
 
+	if(amount_list_el(*moves) < 3)
+		return;
 	while ((cur)->next->next)
 	{
 		if (cur->next->num == 1 && cur->next->next->num == 2
@@ -299,12 +338,37 @@ void replace_sa_sb(t_ab **moves)
 	}
 }
 
+void remove_sa_sa(t_ab **moves)
+{
+	t_ab *cur;
+	t_ab *temp;
+	cur = *moves;
+
+	if(amount_list_el(*moves) < 3)
+		return;
+	while ((cur)->next->next)
+	{
+		if (cur->next->num == 1 && cur->next->next->num == 1)
+		{
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+			temp = cur->next;
+			cur->next = temp->next;
+			free(temp);
+		}
+		else
+			cur = (cur)->next;
+	}
+}
 void remove_ra_rrb(t_ab **moves)
 {
 	t_ab *cur;
 	t_ab *temp;
 	cur = *moves;
 
+	if(amount_list_el(*moves) < 3)
+		return;
 	while ((cur)->next->next)
 	{
 		if (cur->next->num == 7 && cur->next->next->num == 10
@@ -327,7 +391,9 @@ void remove_6_9(t_ab **moves)
 	t_ab *temp;
 	cur = *moves;
 
-	while ((cur)->next->next)
+	if(amount_list_el(*moves) < 3)
+		return;
+		while ((cur)->next->next)
 	{
 		if (cur->next->num == 6 && cur->next->next->num == 9
 			|| cur->next->num == 9 && cur->next->next->num == 6)
@@ -352,7 +418,8 @@ void delete_spare(t_ab **moves)
 	remove_ra_rrb(moves);
 	delete_ra_rb(moves);
 	remove_pa_pb(moves);
-
+	delete_1_6_5(moves);
+	remove_sa_sa(moves);
 
 
 
