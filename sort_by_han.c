@@ -1,160 +1,142 @@
-//
-// Created by Aleksandr Baranov on 3/31/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_by_han.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 17:53:41 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/05 17:53:43 by abaranov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
-#include "header.h"
-
-int sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
+void				sort_3_a(t_ab *a, t_ab *b, t_ab *moves)
 {
-	t_ab *newNode;
-	t_ab *newNodeb;
+	if (a->next->num < a->next->next->num)
+	{
+		if (amount_list_el(b) > 2)
+			if ((b)->next->num > (b)->next->next->num)
+			{
+				rr(&a, &b, moves);
+				ss(a, b, moves);
+				rrr(&a, &b, moves);
+			}
+			else
+			{
+				rb(&a, moves);
+				if ((b)->num > (b)->next->num)
+					ss(a, b, moves);
+				else
+					sb(&a, moves);
+				rrb(&a, moves);
+			}
+		else
+		{
+			rb(&a, moves);
+			sb(&a, moves);
+			rrb(&a, moves);
+		}
+	}
+}
 
-	newNodeb = *b;
-	newNode = *a;
+int					sort_by_hand_b(t_ab **a, t_ab **b, int size, t_ab *moves)
+{
+	t_ab		*na;
+	t_ab		*nb;
 
-	vizual(*a, *b);
-
+	nb = *b;
+	na = *a;
 	if (amount_list_el(*a) == 3)
-
-		easy_sort_b(*a, moves);
-
+		*a = easy_sort_b(*a, moves);
 	else
 	{
-		if (size >= 2)
+		if (na->num < na->next->num)
 		{
-			if (newNode->num < newNode->next->num)
-			{
-				if (amount_list_el(newNodeb) > 1)
-				{
-					if ((newNodeb)->num > (newNodeb)->next->num)
-						ss(newNode, newNodeb, moves);
-					else
-						sb(&newNode, moves);
-				}
-				else
-					sb(&newNode, moves);
-			}
+			if (amount_list_el(nb) > 1 && (nb)->num > (nb)->next->num)
+				ss(na, nb, moves);
+			else
+				sb(&na, moves);
 		}
 		if (size == 3)
-		{
-			if (newNode->next->num < newNode->next->next->num)
-			{
-				if (amount_list_el(newNodeb) > 2)
-				{
-					if ((*b)->next->num > (*b)->next->next->num)
-					{
-						rr(&newNode, &newNodeb, moves);
-						ss(newNode, newNodeb, moves);
-						rrr(&newNode, &newNodeb, moves);
-
-					}
-					else
-					{
-						rb(&newNode, moves);
-						//	ft_putstr("ra\n");
-						if ((newNodeb)->num > (newNodeb)->next->num)
-							ss(newNode, newNodeb, moves);
-						else
-							sb(&newNode, moves);
-						//	ft_putstr("sa\n");
-						rrb(&newNode, moves);
-					}
-				}
-				else
-				{
-					rb(&newNode, moves);
-					//	ft_putstr("ra\n");
-					if ((newNodeb)->num > (newNodeb)->next->num)
-						ss(newNode, newNodeb, moves);
-					else
-						sb(&newNode, moves);
-					//	ft_putstr("sa\n");
-					rrb(&newNode, moves);
-					//	ft_putstr("rra\n");
-					//vizual(*a, b);
-				}
-			}
-			if (!sort_up_b(newNode))
-				sort_by_hand_b(a, b, size, moves);
-		}
+			sort_3_a(na, nb, moves);
+		if (size == 3 && !sort_up_b(na))
+			sort_by_hand_b(a, b, size, moves);
 	}
 	return (0);
 }
 
-int sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
+void				sort_3_b(t_ab *na, t_ab *nb, t_ab *moves)
 {
-	t_ab *newNode;
-	t_ab *newNodeb;
+	if (na->next->num > na->next->next->num)
+	{
+		if (amount_list_el(nb) > 2)
+			if ((nb)->next->num < (nb)->next->next->num)
+			{
+				rr(&na, &nb, moves);
+				ss(na, nb, moves);
+				rrr(&na, &nb, moves);
+			}
+			else
+			{
+				ra(&na, moves);
+				if ((nb)->num < (nb)->next->num)
+					ss(na, nb, moves);
+				else
+					sa(&na, moves);
+				rra(&na, moves);
+			}
+		else
+		{
+			ra(&na, moves);
+			sa(&na, moves);
+			rra(&na, moves);
+		}
+	}
+}
 
-	newNodeb = *b;
-	newNode = *a;
+void				sort_by_hand(t_ab **a, t_ab **b, int size, t_ab *moves)
+{
+	t_ab		*na;
 
-	//vizual(*a, *b);
+	na = *a;
 	if (amount_list_el(*a) == 3)
-		easy_sort_a(*a, moves);
+	{
+		if (((*a)->num < (*a)->next->num) && (*a)->next->num >
+		(*a)->next->next->num && (*a)->num < (*a)->next->next->num)
+		{
+			rra(a, moves);
+			sa(a, moves);
+		}
+		else
+			easy_sort_a(*a, moves);
+	}
 	else
 	{
-		if (size >= 2)
+		if (na->num > na->next->num)
 		{
-			if (newNode->num > newNode->next->num)
-			{
-				if (amount_list_el(newNodeb) > 1)
-				{
-					if ((newNodeb)->num < (newNodeb)->next->num)
-						ss(newNode, newNodeb, moves);
-					else
-						sa(&newNode, moves);
-				}
-				else
-					sa(&newNode, moves);
-			}
+			(amount_list_el(*b) > 1 &&
+			(*b)->num < (*b)->next->num) ? ss(na, *b, moves) : sa(&na, moves);
 		}
-		if (size == 3)
-		{
-			if (newNode->next->num > newNode->next->next->num)
-			{
-				if (amount_list_el(newNodeb) > 2)
-				{
-					if ((*b)->next->num < (*b)->next->next->num)
-					{
-						rr(&newNode, &newNodeb, moves);
-						ss(newNode, newNodeb, moves);
-						rrr(&newNode, &newNodeb, moves);
+		(size == 3) ? sort_3_b(na, *b, moves) : 0;
+		if (size == 3 && !sort_up_a(na))
+			return (sort_by_hand(&na, b, size, moves));
+	}
+}
 
-					}
-					else
-					{
-						ra(&newNode, moves);
-						//	ft_putstr("ra\n");
-						if ((newNodeb)->num < (newNodeb)->next->num)
-							ss(newNode, newNodeb, moves);
-						else
-							sa(&newNode, moves);
-						rra(&newNode, moves);
-					}
-				}
-				else
-				{
-					ra(&newNode, moves);
-					//	ft_putstr("ra\n");
-					if (amount_list_el(newNodeb) > 2)
-					{
+int					less_then_med(t_ab *a, int med)
+{
+	t_ab		*na;
 
-						if ((newNodeb)->num < (newNodeb)->next->num)
-							ss(newNode, newNodeb, moves);
-						else
-							sa(&newNode, moves);
-					}
-					sa(&newNode, moves);
-					//sa(&newNode, moves);
-					//	ft_putstr("sa\n");
-					rra(&newNode, moves);
-				}//	ft_putstr("rra\n");
-			}
-			if (!sort_up_a(newNode))
-				return sort_by_hand(&newNode, b, size, moves);
-		}
+	if (a == NULL)
+		return (0);
+	na = a;
+	while (na != NULL)
+	{
+		if (na->num <= med)
+			return (1);
+		na = na->next;
 	}
 	return (0);
 }

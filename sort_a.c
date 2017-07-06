@@ -1,10 +1,33 @@
-//
-// Created by Aleksandr Baranov on 3/31/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_a.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 18:56:59 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/05 18:57:00 by abaranov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "header.h"
+#include "push_swap.h"
 
-void move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
+void				ft_push_swap(t_ab **a, t_ab **b, int size, t_ab *moves)
+{
+	int n_pushed;
+
+	if (size > 3)
+	{
+		n_pushed = partition_a(a, b, size, moves);
+		ft_push_swap(a, b, size - n_pushed, moves);
+		ft_push_swapb(b, a, n_pushed, moves);
+		move_back_a(a, b, n_pushed, moves);
+	}
+	else if (size > 1)
+		sort_by_hand(a, b, size, moves);
+}
+
+void				move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int i;
 
@@ -16,69 +39,42 @@ void move_back_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 	}
 }
 
-int sort_up_a(t_ab *a)
+int					sort_up_a(t_ab *a)
 {
-	int w = a->num;
-	int y = a->next->num;
-	int u = a->next->next->num;
-	if (w < y && y < u)
+	if (a->num < a->next->num && a->next->num < a->next->next->num)
 		return (1);
 	return (0);
 }
 
-
-void easy_sort_a(t_ab *a, t_ab *moves)
+t_ab				*easy_sort_a(t_ab *a, t_ab *moves)
 {
-
-
-	if (sort_up_a(a))
-		return;
-	else if (sort_up_b(a))
+	if ((a)->num > (a)->next->num
+		&& (a)->next->num > (a)->next->next->num)
 	{
 		sa(&a, moves);
 		rra(&a, moves);
 	}
-	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num < a->next->next->num)
+	if (a->num > a->next->num &&
+			a->next->num < a->next->next->num && a->num < a->next->next->num)
 		sa(&a, moves);
-	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num > a->next->num &&
+			a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	else if (a->num < a->next->num && a->next->num > a->next->next->num && a->num > a->next->next->num)
+	else if (a->num < a->next->num &&
+			a->next->num > a->next->next->num && a->num > a->next->next->num)
 		rra(&a, moves);
-	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num > a->next->next->num)
+	else if (a->num > a->next->num &&
+			a->next->num < a->next->next->num && a->num > a->next->next->num)
 		ra(&a, moves);
-	else if (a->num < a->next->num && a->next->num > a->next->next->num && a->num < a->next->next->num)
-	{
-		rra(&a, moves);
-		sa(&a, moves);
-	}
-
+	return (a);
 }
 
-int less_then_med(t_ab *a, int med)
+int					partition_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
-	t_ab *newNode;
-
-
-	if (a == NULL)
-		return (0);
-	newNode = a;
-	while (newNode != NULL)
-	{
-		if (newNode->num <= med)
-			return (1);
-		newNode = newNode->next;
-	}
-	return (0);
-}
-
-
-
-int partition_a(t_ab **a, t_ab **b, int size, t_ab *moves)
-{
-	int med;
-	int count;
-	int j;
-	int f;
+	int		med;
+	int		count;
+	int		j;
+	int		f;
 
 	f = 0;
 	j = 0;
@@ -87,10 +83,6 @@ int partition_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 	if (amount_list_el(*b) != 0)
 		f = 1;
 	while (less_then_med(*a, med))
-	{
-//		if(amount_list_el(*a) == 3)
-//			break;
-
 		if ((*a)->num <= med)
 		{
 			pb(a, b, moves);
@@ -101,20 +93,6 @@ int partition_a(t_ab **a, t_ab **b, int size, t_ab *moves)
 			j++;
 			ra(a, moves);
 		}
-	}
-	vizual(*a, *b);
-	if (f == 1)
-	{
-		if (j > amount_list_el(*a) / 2)
-		{
-			j = amount_list_el(*a) - j;
-			while (j--)
-				ra(a, moves);
-		}
-		else
-			while (j--)
-				rra(a, moves);
-	}
+	a_back_ra_rra(f, j, a, moves);
 	return (count);
 }
-

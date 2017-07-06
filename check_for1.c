@@ -1,56 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa_sb_ss_pa_pb.c                                   :+:      :+:    :+:   */
+/*   check_for1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/05 19:08:23 by abaranov          #+#    #+#             */
-/*   Updated: 2017/04/05 19:08:24 by abaranov         ###   ########.fr       */
+/*   Created: 2017/04/06 15:28:39 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/06 15:28:40 by abaranov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void				sa(t_ab **strc, t_ab *moves)
+void				pb_ch(t_ab **a, t_ab **b)
 {
-	int t;
+	t_ab *tmp;
 
-	if ((*strc) != NULL && (*strc)->next != NULL)
-	{
-		t = (*strc)->next->num;
-		(*strc)->next->num = (*strc)->num;
-		(*strc)->num = t;
-	}
-	lst_add(&moves, 1);
+	(void)(*b);
+	if (!(*a))
+		return ;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
+	stack_add(b, &tmp);
 }
 
-void				sb(t_ab **strc, t_ab *moves)
+void				pa_ch(t_ab **a, t_ab **b)
 {
-	int t;
+	t_ab *tmp;
 
-	if ((*strc) != NULL && (*strc)->next != NULL)
-	{
-		t = (*strc)->next->num;
-		(*strc)->next->num = (*strc)->num;
-		(*strc)->num = t;
-	}
-	lst_add(&moves, 2);
+	(void)(*b);
+	if (!(*a))
+		return ;
+	tmp = (*a);
+	(*a) = (*a)->next;
+	tmp->next = NULL;
+	stack_add(b, &tmp);
 }
 
-void				sa_ss(t_ab **strc)
-{
-	int t;
-
-	if ((*strc) != NULL && (*strc)->next != NULL)
-	{
-		t = (*strc)->next->num;
-		(*strc)->next->num = (*strc)->num;
-		(*strc)->num = t;
-	}
-}
-
-void				sb_ss(t_ab **strc)
+void				sa_ch(t_ab **strc)
 {
 	int t;
 
@@ -62,9 +50,30 @@ void				sb_ss(t_ab **strc)
 	}
 }
 
-void				ss(t_ab *a, t_ab *b, t_ab *moves)
+void				sb_ch(t_ab **strc)
 {
-	sa_ss(&a);
-	sb_ss(&b);
-	lst_add(&moves, 3);
+	int t;
+
+	if ((*strc) != NULL && (*strc)->next != NULL)
+	{
+		t = (*strc)->next->num;
+		(*strc)->next->num = (*strc)->num;
+		(*strc)->num = t;
+	}
+}
+
+void				rrb_ch(t_ab **a)
+{
+	t_ab *tmp;
+	t_ab *end;
+
+	if (!(*a) || !(*a)->next)
+		return ;
+	tmp = *a;
+	while (tmp->next->next)
+		tmp = tmp->next;
+	end = tmp->next;
+	tmp->next = NULL;
+	end->next = (*a);
+	(*a) = end;
 }

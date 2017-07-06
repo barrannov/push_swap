@@ -1,31 +1,29 @@
-//
-// Created by Aleksandr Baranov on 3/31/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_b.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 18:40:22 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/05 18:40:27 by abaranov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "header.h"
+#include "push_swap.h"
 
-int partition_b(t_ab **a, t_ab **b, int size, t_ab *moves)
+int					partition_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int med;
 	int count;
 	int j;
-	int f;
+
 	j = 0;
 	count = 0;
-	f = 0;
 	med = find_med(*a, size);
-//	if (size == 3)
-//	{
-//		if ()
-//	}
-//	else
-	int t = amount_list_el(*a);
-//	if(t > 3)
-//		f = 1;
 	while (more_then_med(*a, med))
 	{
-		//	vizual(*a, *b);
-		if ((*a)->num >= med)
+		if ((*a)->num > med)
 		{
 			pa(a, b, moves);
 			count++;
@@ -36,20 +34,11 @@ int partition_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 			rb(a, moves);
 		}
 	}
-
-
-	if (j > amount_list_el(*a) / 2)
-	{
-		j = amount_list_el(*a) - j;
-		while (j--)
-			rb(a, moves);
-	}
-	else
-		while (j--)
-			rrb(a, moves);
+	b_back_rb_rrb(j, a, moves);
 	return (count);
 }
-void move_back_b(t_ab **a, t_ab **b, int size, t_ab *moves)
+
+void				move_back_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 {
 	int i;
 
@@ -61,55 +50,53 @@ void move_back_b(t_ab **a, t_ab **b, int size, t_ab *moves)
 	}
 }
 
-
-void easy_sort_b(t_ab *a, t_ab *moves)
+t_ab				*easy_sort_b(t_ab *a, t_ab *moves)
 {
-	if (sort_up_b(a))
-		return;
-	if (sort_up_a(a))
+	if (a->num < a->next->num && a->next->num < a->next->next->num)
 	{
 		sb(&a, moves);
 		rb(&a, moves);
 	}
-	if (a->num < a->next->num && a->next->num > a->next->next->num && a->num > a->next->next->num)
+	if (a->num < a->next->num
+		&& a->next->num > a->next->next->num && a->num > a->next->next->num)
 		sb(&a, moves);
-	if (a->num < a->next->num && a->next->num > a->next->next->num && a->num < a->next->next->num)
+	if (a->num < a->next->num
+		&& a->next->num > a->next->next->num && a->num < a->next->next->num)
 		rb(&a, moves);
-	else if (a->num > a->next->num && a->next->num < a->next->next->num && a->num < a->next->next->num)
-		rra(&a, moves);
-	if (a->num < a->next->num && a->next->num> a->next->next->num && a->num < a->next->next->num)
+	if (a->num > a->next->num
+		&& a->next->num < a->next->next->num && a->num < a->next->next->num)
+		rrb(&a, moves);
+	if (a->num < a->next->num
+		&& a->next->num > a->next->next->num && a->num < a->next->next->num)
 		rb(&a, moves);
-	if (a->num > a->next->num && a->next->num< a->next->next->num && a->num > a->next->next->num)
+	if (a->num > a->next->num
+		&& a->next->num < a->next->next->num && a->num > a->next->next->num)
 	{
 		rrb(&a, moves);
 		sb(&a, moves);
 	}
-
+	return (a);
 }
 
-int sort_up_b(t_ab *a)
+int					sort_up_b(t_ab *a)
 {
-	int w = a->num;
-	int y = a->next->num;
-	int u = a->next->next->num;
-	if (w > y && y > u)
+	if (a->num > a->next->num && a->next->num > a->next->next->num)
 		return (1);
 	return (0);
 }
 
-int more_then_med(t_ab *a, int med)
+int					more_then_med(t_ab *a, int med)
 {
-	t_ab *newNode;
-
+	t_ab *na;
 
 	if (a == NULL)
 		return (0);
-	newNode = a;
-	while (newNode)
+	na = a;
+	while (na)
 	{
-		if (newNode->num >= med)
+		if (na->num > med)
 			return (1);
-		newNode = newNode->next;
+		na = na->next;
 	}
 	return (0);
 }

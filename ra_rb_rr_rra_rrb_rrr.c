@@ -1,14 +1,26 @@
-#include "header.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ra_rb_rr_rra_rrb_rrr.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 19:13:27 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/05 19:13:28 by abaranov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ra_rr(t_ab **strc)
+#include "push_swap.h"
+
+void				ra_rr(t_ab **strc)
 {
-	t_ab *tmp;
-	t_ab *end;
+	t_ab	*tmp;
+	t_ab	*end;
 
 	if (*strc == NULL)
-		return;
+		return ;
 	if (!(*strc)->next)
-		return;
+		return ;
 	end = *strc;
 	(*strc) = (*strc)->next;
 	tmp = *strc;
@@ -18,24 +30,20 @@ void ra_rr(t_ab **strc)
 	end->next = NULL;
 }
 
-void rr(t_ab **a, t_ab **b, t_ab *moves)
+void				rr(t_ab **a, t_ab **b, t_ab *moves)
 {
-	count++;
-	printf("\nrr");
 	ra_rr(a);
 	ra_rr(b);
 	lst_add(&moves, 8);
 }
 
-
-void rrb_rrr(t_ab **a)
+void				rrb_rrr(t_ab **a)
 {
-
-	t_ab *tmp;
-	t_ab *end;
+	t_ab	*tmp;
+	t_ab	*end;
 
 	if (!(*a) || !(*a)->next)
-		return;
+		return ;
 	tmp = *a;
 	while (tmp->next->next)
 		tmp = tmp->next;
@@ -45,13 +53,13 @@ void rrb_rrr(t_ab **a)
 	(*a) = end;
 }
 
-void rra_rrr(t_ab **a)
+void				rra_rrr(t_ab **a)
 {
-	t_ab *tmp;
-	t_ab *end;
+	t_ab	*tmp;
+	t_ab	*end;
 
 	if (!(*a) || !(*a)->next)
-		return;
+		return ;
 	tmp = *a;
 	while (tmp->next->next)
 		tmp = tmp->next;
@@ -61,14 +69,9 @@ void rra_rrr(t_ab **a)
 	(*a) = end;
 }
 
-void rrr(t_ab **a, t_ab **b, t_ab *moves)
+void				rrr(t_ab **a, t_ab **b, t_ab *moves)
 {
-	count++;
-
-	printf("\nrrr");
-
 	rra_rrr(a);
 	rrb_rrr(b);
 	lst_add(&moves, 11);
 }
-

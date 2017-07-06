@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 15:32:57 by abaranov          #+#    #+#             */
-/*   Updated: 2016/12/10 21:23:05 by abaranov         ###   ########.fr       */
+/*   Created: 2017/02/06 16:53:15 by abaranov          #+#    #+#             */
+/*   Updated: 2017/02/06 16:58:53 by abaranov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-intmax_t	ft_atoi(const char *str)
+# include "stdlib.h"
+# include "libft/libft.h"
+# define BUFF_SIZE 11
+
+typedef struct		s_struct
 {
-	intmax_t f;
-	intmax_t s;
+	int				fd;
+	char			*balance;
+	struct s_struct	*next;
+}					t_struct;
 
-	s = 1;
-	f = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' && *(str + 1) >= '0' && *(str + 1) <= '9')
-	{
-		s = -1;
-		str++;
-	}
-	if (*str == '+' && *(str + 1) >= '0' && *(str + 1) <= '9')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		f = f * 10 + *str - '0';
-		str++;
-	}
-	return (f * s);
-}
+int					get_next_line(const int fd, char **line);
+
+#endif

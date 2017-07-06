@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r.c                                                :+:      :+:    :+:   */
+/*   check_for2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaranov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/05 19:16:08 by abaranov          #+#    #+#             */
-/*   Updated: 2017/04/05 19:16:09 by abaranov         ###   ########.fr       */
+/*   Created: 2017/04/06 15:30:49 by abaranov          #+#    #+#             */
+/*   Updated: 2017/04/06 15:30:51 by abaranov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void				rrb(t_ab **a, t_ab *moves)
+void				rra_ch(t_ab **a)
 {
-	t_ab	*tmp;
-	t_ab	*end;
+	t_ab *tmp;
+	t_ab *end;
 
 	if (!(*a) || !(*a)->next)
 		return ;
@@ -26,30 +26,12 @@ void				rrb(t_ab **a, t_ab *moves)
 	tmp->next = NULL;
 	end->next = (*a);
 	(*a) = end;
-	lst_add(&moves, 10);
 }
 
-void				rra(t_ab **a, t_ab *moves)
+void				rb_ch(t_ab **strc)
 {
-	t_ab	*tmp;
-	t_ab	*end;
-
-	if (!(*a) || !(*a)->next)
-		return ;
-	tmp = *a;
-	while (tmp->next->next)
-		tmp = tmp->next;
-	end = tmp->next;
-	tmp->next = NULL;
-	end->next = (*a);
-	(*a) = end;
-	lst_add(&moves, 9);
-}
-
-void				rb(t_ab **strc, t_ab *moves)
-{
-	t_ab	*tmp;
-	t_ab	*end;
+	t_ab *tmp;
+	t_ab *end;
 
 	if (*strc == NULL)
 		return ;
@@ -62,13 +44,12 @@ void				rb(t_ab **strc, t_ab *moves)
 		tmp = tmp->next;
 	tmp->next = end;
 	end->next = NULL;
-	lst_add(&moves, 7);
 }
 
-void				ra(t_ab **strc, t_ab *moves)
+void				ra_ch(t_ab **strc)
 {
-	t_ab	*tmp;
-	t_ab	*end;
+	t_ab *tmp;
+	t_ab *end;
 
 	if (*strc == NULL)
 		return ;
@@ -81,5 +62,16 @@ void				ra(t_ab **strc, t_ab *moves)
 		tmp = tmp->next;
 	tmp->next = end;
 	end->next = NULL;
-	lst_add(&moves, 6);
+}
+
+void				ss_ch(t_ab *a, t_ab *b)
+{
+	sa_ch(&a);
+	sb_ch(&b);
+}
+
+void				rrr_ch(t_ab **a, t_ab **b)
+{
+	rra_ch(a);
+	rrb_ch(b);
 }
